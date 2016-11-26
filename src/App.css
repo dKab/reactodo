@@ -1,0 +1,10 @@
+.search {
+    float: right;
+}
+.clearfix {
+    overflow: hidden;
+}
+.logo {
+    float: left;
+    padding: 10px;
+}

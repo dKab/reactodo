@@ -1,0 +1,12 @@
+.search__clear {
+    margin-left: -15px;
+}
+.search > * {
+    display: inline-block;
+}
+.search__input {
+    margin-left: 10px;
+}
+.search {
+    padding: 10px;
+}
