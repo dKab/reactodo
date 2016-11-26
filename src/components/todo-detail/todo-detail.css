@@ -1,0 +1,9 @@
+.todo-detail__description {
+    display: block;
+    height:400px;
+    width: 99%;
+}
+
+.todo-detail > div {
+    margin-bottom: 10px;
+}

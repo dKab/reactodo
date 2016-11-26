@@ -1,0 +1,17 @@
+.todo-item {
+    border: 1px solid #7f7f7f;
+    height: 40px;
+    line-height: 40px;
+    border-top: none;
+    padding: 0 0 0 15px;
+}
+.todo-item:first-child {
+    border-top: 1px solid #7f7f7f;
+}
+.todo-item__edit-btn {
+    float: right;
+    margin: 10px 10px 0 0;
+}
+.todo-item__done-check {
+    margin-right: 20px;
+}
