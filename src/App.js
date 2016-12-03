@@ -4,6 +4,7 @@ import Search from './components/search/search.component';
 import AddItem from './components/add-item/add-item.component';
 import TodoList from './components/todo-list/todo-list.component';
 import TodoDetail from './components/todo-detail/todo-detail.component';
+import Categorytree from './components/category-tree/category-tree.component';
 import './App.css';
 
 class App extends Component {
@@ -26,6 +27,7 @@ class App extends Component {
               <div className="top">
                   <AddItem placeholder="Enter category name" />
               </div>
+              <Categorytree />
           </div><div className="todos-container">
             <div id="list-view">
                 <div className="top"><AddItem placeholder="Enter task name" /></div>
