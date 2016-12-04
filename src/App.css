@@ -15,15 +15,15 @@
 
 .categories-left {
     vertical-align: top;
-    padding: 0 10px;
-    width: 30%;
+    padding: 0 0 0 10px;
+    width: 25%;
     display: inline-block;
     box-sizing: border-box;
 }
 .todos-container {
-    width: 70%;
+    width: 75%;
     display: inline-block;
-    padding: 0 10px 0 0;
+    padding: 0 10px 0 10px;
     box-sizing: border-box;
 }
 .todos-container .add-item {
@@ -32,9 +32,34 @@
 .top {
     overflow: hidden;
     margin-bottom: 10px;
+    padding: 0 10px;
 }
-
+.fl {
+    float: left;
+}
 .fr {
     float: right;
 }
 
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+html, body, #root, .app-container {
+    height: 100%;
+    margin:0;
+    padding:0;
+    overflow: hidden;
+}
+
+.categories-left, .todos-container {
+    height: calc(100% - 88px);
+    max-height: calc(100% - 88px);
+    overflow-y: scroll;
+}
+* {
+    margin: 0;
+    padding: 0;
+}

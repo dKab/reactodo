@@ -23,14 +23,14 @@ class App extends Component {
             <div className="logo">Todo list</div>
             <Search />
         </div>
-        <Progressbar progress={this.state.progress} /><div className="categories-left">
-              <div className="top">
-                  <AddItem placeholder="Enter category name" />
-              </div>
+        <Progressbar progress={this.state.progress} />
+          <div className="top">
+              <div className="fl"><AddItem placeholder="Enter category name" /></div>
+              <div className="fr"><AddItem  placeholder="Enter task name" /></div>
+          </div><div className="categories-left">
               <Categorytree />
           </div><div className="todos-container">
             <div id="list-view">
-                <div className="top"><AddItem placeholder="Enter task name" /></div>
                 <TodoList />
             </div>
             <TodoDetail />

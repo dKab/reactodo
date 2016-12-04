@@ -1,5 +1,6 @@
 .search__clear {
     margin-left: -15px;
+    vertical-align: bottom;
 }
 .search > * {
     display: inline-block;

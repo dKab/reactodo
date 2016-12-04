@@ -7,3 +7,9 @@
 .todo-detail > div {
     margin-bottom: 10px;
 }
+.todo-detail__save {
+    margin-right: 10px;
+}
+.todo-detail .top {
+    padding: 0;
+}
