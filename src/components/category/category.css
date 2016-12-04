@@ -1,7 +1,3 @@
 .category {
     overflow: hidden;
 }
-
-.category__remove-btn, .category__add-btn {
-    float: right;
-}
