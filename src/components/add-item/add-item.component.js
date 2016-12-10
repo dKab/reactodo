@@ -1,10 +1,18 @@
 import React from 'react';
 
-export default function AddItem(props) {
-    return (
-        <div className="add-item">
-            <input className="add-item__input" placeholder={props.placeholder} type="text"/>
-            <button className="add-item__button">Add</button>
-        </div>
-    );
+export default class AddItem extends React.Component {
+    
+    handleBtnClick() {
+
+    }
+
+    render() {
+        return (
+            <div className="add-item">
+                <input type="text" className="add-item__input" ref={(input) => this.input = input} placeholder={this.props.placeholder} />
+                <button className="add-item__button" onClick={this.handleBtnClick.bind(this)}>Add</button>
+            </div>
+        );
+    }
+
 }
