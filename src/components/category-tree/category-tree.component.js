@@ -2,33 +2,47 @@ import React from 'react';
 import Category from '../category/category.component';
 
 export default function Categorytree(props) {
-    const categories = [
-        { name: 'category1', id: 1, children: [
-            {
-                name: 'category1_1', id: 5
+    const categories = [{
+            name: 'category1',
+            id: 1,
+            parentId: null,
+        },
+        {
+            name: 'category1_1',
+            id: 2,
+            parentId: 1
             },
-            {
-                name: 'category1_2', id: 6
-            }
-        ] },
-        { name: 'category2',  id: 2},
-        { name: 'category3', id: 3, children: [
-            {
-                name: 'category3_1', id: 7
+        {
+            name: 'category1_2',
+            id: 3,
+            parentId: 1
             },
-            {
-                name: 'category3_2', id: 8, children: [
-                {
-                    name: 'category3_2_1', id: 9
-                },
-                {
-                    name: 'category3_2_2', id: 10
-                }
-            ]
-            }
-        ] },
-        { name: 'category4', id: 4 }
-    ], elems = renderTree(categories, 0);
+        {
+            name: 'category1_3',
+            id: 4,
+            parentId: 1
+            },
+        {
+            name: 'category1_2_1',
+            id: 5,
+            parentId: 3
+            },
+        {
+            name: 'category2',
+            id: 6,
+            parentId: null
+            },
+        {
+            name: 'category3',
+            id: 7,
+            parentId: null
+            },
+        {
+            name: 'category2_1',
+            id: 8,
+            parentId: 6
+            },
+        ], elems = renderTree(categories, 0, categories);
 
     return (
       <div className="category-tree">
@@ -37,7 +51,7 @@ export default function Categorytree(props) {
     );
 }
 
-function renderTree(categories, margin) {
+function renderTree(categories, margin, allCategories, rendered = []) {
 
     const style = {
         marginLeft: margin + 'px'
@@ -45,17 +59,21 @@ function renderTree(categories, margin) {
 
     return categories.map((cat) => {
         const category = <Category category={cat} />;
-
-        if (cat.children && cat.children.length > 0) {
-            const subTree = renderTree(cat.children, margin + step);
+        const children = allCategories.filter(category => category.parentId === cat.id);
+        if (children.length > 0) {
+            const subTree = renderTree(children, margin + step, allCategories, rendered);
             return (
-                    <div key={cat.id}  style={style}>
-                        {category}
-                        {subTree}
-                    </div>
-                );
-        } else {
+                <div key={cat.id}  style={style}>
+                    {category}
+                    {subTree}
+                </div>
+            );
+        } else if (rendered.indexOf(cat.id) === -1) {
+            console.log(cat.id);
+            rendered.push(cat.id);
             return <div key={cat.id}  style={style}>{category}</div>;
+        } else {
+            return;
         }
     });
 }
