@@ -63,9 +63,13 @@ html, body, #root, .app-container {
 .categories-left, .todos-container {
   height: calc(100% - 88px);
   max-height: calc(100% - 88px);
+  min-height: calc(100% - 88px);
   overflow-y: scroll;
 }
 * {
   margin: 0;
   padding: 0;
+}
+#root > [data-reactroot] {
+  height: 100%;
 }
