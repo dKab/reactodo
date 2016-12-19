@@ -60,7 +60,8 @@ function renderTree(categories, margin, allCategories, rendered = []) {
     return categories.map((cat) => {
         const category = <Category category={cat} />;
         const children = allCategories.filter(category => category.parentId === cat.id);
-        if (children.length > 0) {
+        if (children.length > 0 && rendered.indexOf(cat.id) === -1) {
+            rendered.push(cat.id);
             const subTree = renderTree(children, margin + step, allCategories, rendered);
             return (
                 <div key={cat.id}  style={style}>
@@ -69,7 +70,6 @@ function renderTree(categories, margin, allCategories, rendered = []) {
                 </div>
             );
         } else if (rendered.indexOf(cat.id) === -1) {
-            console.log(cat.id);
             rendered.push(cat.id);
             return <div key={cat.id}  style={style}>{category}</div>;
         } else {
