@@ -121,7 +121,7 @@ function categories(state = [], action) {
             });
         case REMOVE_CATEGORY:
             const index = state.findIndex( category => category.id === action.id);
-            return state.slice(0, index).concat(state.slice(index + 1));
+            return removeChildrenRec(action.id, state);
         default:
             return state;
     }
