@@ -3,7 +3,7 @@ import Progressbar from '../progressbar/progressbar.component.js';
 import Search from '../search/search.component';
 import AddItem from '../add-item/add-item.component';
 import TodoList from '../todo-list/todo-list.component';
-import Categorytree from '../category-tree/category-tree.component';
+import { VisibleCategoryTree } from '../visible-category-tree/visible-category-tree.component';
 
 export class Listview extends React.Component {
 
@@ -28,7 +28,7 @@ export class Listview extends React.Component {
                 </div>
                 {this.props.children}
                 <div className="categories-left">
-                    <Categorytree />
+                    <VisibleCategoryTree />
                 </div>
                 <div className="todos-container">
                     <div id="list-view">
