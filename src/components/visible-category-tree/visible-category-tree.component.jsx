@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import CategoryTree from '../category-tree/category-tree.component';
+import { addCategory } from '../../actions';
 
 
 const getVisibleCategories = (categories, phrase, showDone, todos) => {
@@ -40,8 +41,15 @@ const mapStateToProps = (state) => {
 	}
 };
 
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onAddChildCategory: (name, parentId) => dispatch(addCategory(name, parentId))
+	}
+};
+
 const VisibleCategoryTree = connect(
-		mapStateToProps
+		mapStateToProps,
+		mapDispatchToProps
 )(CategoryTree);
 
 export default VisibleCategoryTree;
