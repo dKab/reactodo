@@ -1,58 +1,47 @@
-import React from 'react';
+import { connect } from 'react-redux';
 import CategoryTree from '../category-tree/category-tree.component';
 
-export class VisibleCategoryTree extends React.Component {
 
-	constructor() {
-		super();
-		this.state = {
-			categories: [
-				{
-					name: 'category1',
-					id: 1,
-					parentId: null,
-				},
-				{
-					name: 'category1_1',
-					id: 2,
-					parentId: 1
-				},
-				{
-					name: 'category1_2',
-					id: 3,
-					parentId: 1
-				},
-				{
-					name: 'category1_3',
-					id: 4,
-					parentId: 1
-				},
-				{
-					name: 'category1_2_1',
-					id: 5,
-					parentId: 3
-				},
-				{
-					name: 'category2',
-					id: 6,
-					parentId: null
-				},
-				{
-					name: 'category3',
-					id: 7,
-					parentId: null
-				},
-				{
-					name: 'category2_1',
-					id: 8,
-					parentId: 6
-				},
-			]
-		}
+const getVisibleCategories = (categories, phrase, showDone, todos) => {
+	const visible = showDone ? categories : categories.filter(category => isCategoryDone(category, categories, todos));
+	if (phrase !== '') {
+		return visible.filter((cat) => cat.name.indexOf(phrase) >= 0);
 	}
+	return visible;
+};
 
-	render() {
-		return <CategoryTree categories={this.state.categories} />;
-	}
 
+function isCategoryDone(category, categories, todos) {
+	const descendants = [];
+	getAllDescendants(category, categories, descendants);
+	const allRelevantCategories = descendants.concat([category]),
+			undoneCategory = allRelevantCategories.find(cat => {
+		const categoryTodos = getCategoryTodos(cat, todos),
+				undone = categoryTodos.find(todo => todo.done === false);
+		return typeof undone !== 'undefined';
+	});
+	return typeof undoneCategory === 'undefined';
 }
+
+function getAllDescendants(category, categories, descendants) {
+	const children = categories.filter(cat => cat.parentId === category);
+
+	Array.prototype.push.apply(descendants, children);
+	children.forEach(child => getAllDescendants(child, categories, descendants));
+}
+
+function getCategoryTodos(category, todos) {
+	return todos.filter(todo => todo.categoryId === category.id);
+}
+
+const mapStateToProps = (state) => {
+	return {
+		categories: getVisibleCategories(state.categories, state.searchPhrase, state.showDone, state.todos)
+	}
+};
+
+const VisibleCategoryTree = connect(
+		mapStateToProps
+)(CategoryTree);
+
+export default VisibleCategoryTree;

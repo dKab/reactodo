@@ -9,8 +9,7 @@ import './category.css';
 export default function Category(props) {
     return(
         <div className="category">
-            <span className="category__expand-btn"><Expand /></span>
-            {props.category.name}
+            <span className="category__expand-btn"><Expand /></span>{props.category.name}
             <span className="category__edit-btn"><Edit /></span>
             <div className="fr">
                 <span className="category__remove-btn"><Remove /></span>

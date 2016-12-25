@@ -3,41 +3,48 @@ import { ADD_TODO, TOGGLE_TODO, TOGGLE_VISIBILITY_FILTER,
     TOGGLE_CATEGORY_EXPANDED_STATE, SEARCH_PHRASE_CHANGE, ADD_CATEGORY,
     TODO_CHANGE, CHANGE_TODO_CATEGORY, REMOVE_CATEGORY } from './actions';
 
-const state = {
-    showDone: false,
-    searchPhrase: '',
-    categories: [
-        {
-            name: 'category1',
-            id: 1,
-            selected: false,
-            parentId: null,
-            expanded: true
-        },
-        {
-            name: 'category1_1',
-            id: 2,
-            selected: false,
-            parentId: 1
-        }
-    ],
-    todos: [
-        {
-            id: 1,
-            name: 'Consider using Redux',
-            description: 'text',
-            done: true,
-            categoryId: 2
-        }
-    ]
-};
 
-const initialState = {
-    showDone: false,
-    searchPhrase: '',
-    categories: [],
-    todos: []
-};
+/**
+ * This is just to visualize state structure
+ * @param state
+ * @param action
+ * @returns {boolean}
+ */
+//const state = {
+//    showDone: false,
+//    searchPhrase: '',
+//    categories: [
+//        {
+//            name: 'category1',
+//            id: 1,
+//            selected: false,
+//            parentId: null,
+//            expanded: true
+//        },
+//        {
+//            name: 'category1_1',
+//            id: 2,
+//            selected: false,
+//            parentId: 1
+//        }
+//    ],
+//    todos: [
+//        {
+//            id: 1,
+//            name: 'Consider using Redux',
+//            description: 'text',
+//            done: false,
+//            categoryId: 2
+//        }
+//    ]
+//};
+//
+//const initialState = {
+//    showDone: false,
+//    searchPhrase: '',
+//    categories: [],
+//    todos: []
+//};
 
 
 function showDone(state = false, action) {
@@ -107,7 +114,7 @@ function categories(state = [], action) {
                 {
                     name: action.name,
                     parentId: action.parentId,
-                    id: findMaxId(state) + 1,
+                    id: state.length ? findMaxId(state) + 1 : 0,
                     selected: false,
                     expanded: false
                 }
@@ -134,9 +141,6 @@ function categories(state = [], action) {
         }
         return filtered;
     }
-
-
-
 }
 
 function findMaxId(array) {
