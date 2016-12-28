@@ -11,6 +11,7 @@ export const ADD_CATEGORY = 'ADD_CATEGORY';
 export const REMOVE_CATEGORY = 'REMOVE_CATEGORY';
 export const TOGGLE_CATEGORY_EXPANDED_STATE = 'TOGGLE_CATEGORY_EXPANDED_STATE';
 export const CHANGE_TODO_CATEGORY =  'CHANGE_TODO_CATEGORY';
+export const EXPAND_CATEGORY = 'EXPAND_CATEGORY';
 
 
 /*
@@ -46,7 +47,11 @@ export function removeCategory(id) {
 }
 
 export function toggleCategoryExpandedState(id) {
-    return { type: TOGGLE_CATEGORY_EXPANDED_STATE. id}
+    return { type: TOGGLE_CATEGORY_EXPANDED_STATE, id}
+}
+
+export function expandCategory(id) {
+    return { type: EXPAND_CATEGORY, id}
 }
 
 export function changeTodoCategory(todoId, categoryId) {

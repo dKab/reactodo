@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { ADD_TODO, TOGGLE_TODO, TOGGLE_VISIBILITY_FILTER,
     TOGGLE_CATEGORY_EXPANDED_STATE, SEARCH_PHRASE_CHANGE, ADD_CATEGORY,
-    TODO_CHANGE, CHANGE_TODO_CATEGORY, REMOVE_CATEGORY } from './actions';
+    TODO_CHANGE, CHANGE_TODO_CATEGORY, REMOVE_CATEGORY, EXPAND_CATEGORY } from './actions';
 
 
 /**
@@ -123,6 +123,13 @@ function categories(state = [], action) {
             return state.map(category => {
                 if (category.id === action.id) {
                     return Object.assign({}, category, {expanded: !category.expanded});
+                }
+                return category;
+            });
+        case EXPAND_CATEGORY:
+            return state.map(category => {
+                if (category.id === action.id) {
+                    return Object.assign({}, category, { expanded: true});
                 }
                 return category;
             });

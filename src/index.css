@@ -21,7 +21,7 @@ body {
 
 .categories-left {
   vertical-align: top;
-  padding: 0 0 0 10px;
+  padding: 0 5px 0 10px;
   width: 25%;
   display: inline-block;
   box-sizing: border-box;

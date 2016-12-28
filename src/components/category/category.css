@@ -1,3 +1,7 @@
 .category {
     overflow: hidden;
 }
+.category--leaf .category__name {
+    padding-left: 6px;
+    display: inline-block;
+}

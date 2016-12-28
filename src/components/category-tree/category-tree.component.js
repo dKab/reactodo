@@ -2,7 +2,7 @@ import React from 'react';
 import Category from '../category/category.component';
 
 export default function CategoryTree(props) {
-    const elems = renderTree(props.categories, 0, props.categories, props);
+    const elems = renderTree(props.categories, props.categories, props);
 
     return (
       <div className="category-tree">
@@ -11,29 +11,38 @@ export default function CategoryTree(props) {
     );
 }
 
-function renderTree(categories, margin, allCategories, props, rendered = []) {
+function renderTree(categories, allCategories, props, rendered = [], omitSubtree = false, margin = 0) {
 
     const style = {
         marginLeft: margin + 'px'
-    }, step = 10;
+    };
 
     return categories.map((cat) => {
-        const category = <Category category={cat} onPlusClick={props.onAddChildCategory} />;
+        let renderCategory = (isLeaf) => {
+            return <Category category={cat}
+                             isLeaf={isLeaf}
+                             onPlusClick={props.onAddChildCategory}
+                             onTrashClick={props.onDeleteCategory}
+                             onExpandClick={props.onCategoryExpandClick}
+            />;
+        };
         const children = allCategories.filter(category => category.parentId === cat.id);
-        if (children.length > 0 && rendered.indexOf(cat.id) === -1) {
-            rendered.push(cat.id);
-            const subTree = renderTree(children, margin + step, allCategories, props, rendered);
-            return (
-                <div key={cat.id}  style={style}>
-                    {category}
-                    {subTree}
-                </div>
-            );
-        } else if (rendered.indexOf(cat.id) === -1) {
-            rendered.push(cat.id);
-            return <div key={cat.id}  style={style}>{category}</div>;
-        } else {
+        if (rendered.indexOf(cat.id) >= 0) {
             return;
+        }
+        if (children.length > 0) {
+            rendered.push(cat.id);
+            const subTree = renderTree(children, allCategories, props, rendered, !cat.expanded, 10);
+            return omitSubtree
+                ? undefined
+                : (<div key={cat.id}  style={style}>
+                    {renderCategory(false)}
+                    {subTree}
+                    </div>
+                    );
+        } else {
+            rendered.push(cat.id);
+            return omitSubtree ? undefined : <div key={cat.id}  style={style}>{renderCategory(true)}</div>;
         }
     });
 }
