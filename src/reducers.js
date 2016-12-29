@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux'
 import { ADD_TODO, TOGGLE_TODO, TOGGLE_VISIBILITY_FILTER,
     TOGGLE_CATEGORY_EXPANDED_STATE, SEARCH_PHRASE_CHANGE, ADD_CATEGORY,
-    TODO_CHANGE, CHANGE_TODO_CATEGORY, REMOVE_CATEGORY, EXPAND_CATEGORY } from './actions';
+    TODO_CHANGE, CHANGE_TODO_CATEGORY, REMOVE_CATEGORY, EXPAND_CATEGORY, SELECT_CATEGORY,
+SHOW_MODAL, HIDE_MODAL } from './actions';
 
 
 /**
@@ -10,41 +11,49 @@ import { ADD_TODO, TOGGLE_TODO, TOGGLE_VISIBILITY_FILTER,
  * @param action
  * @returns {boolean}
  */
-//const state = {
-//    showDone: false,
-//    searchPhrase: '',
-//    categories: [
-//        {
-//            name: 'category1',
-//            id: 1,
-//            selected: false,
-//            parentId: null,
-//            expanded: true
-//        },
-//        {
-//            name: 'category1_1',
-//            id: 2,
-//            selected: false,
-//            parentId: 1
-//        }
-//    ],
-//    todos: [
-//        {
-//            id: 1,
-//            name: 'Consider using Redux',
-//            description: 'text',
-//            done: false,
-//            categoryId: 2
-//        }
-//    ]
-//};
-//
-//const initialState = {
-//    showDone: false,
-//    searchPhrase: '',
-//    categories: [],
-//    todos: []
-//};
+const state = {
+    showDone: false,
+    searchPhrase: '',
+    categories: [
+        {
+            name: 'category1',
+            id: 1,
+            selected: false,
+            parentId: null,
+            expanded: true
+        },
+        {
+            name: 'category1_1',
+            id: 2,
+            selected: false,
+            parentId: 1
+        }
+    ],
+    todos: [
+        {
+            id: 1,
+            name: 'Consider using Redux',
+            description: 'text',
+            done: false,
+            categoryId: 2
+        }
+    ],
+    modal: {
+        modalType: null,
+        modalProps: {}
+    }
+};
+
+const initialState = {
+    showDone: false,
+    searchPhrase: '',
+    categories: [],
+    todos: [],
+    modal: {
+        modalType: null,
+        modalProps: {}
+    }
+};
 
 
 function showDone(state = false, action) {
@@ -115,7 +124,7 @@ function categories(state = [], action) {
                     name: action.name,
                     parentId: action.parentId,
                     id: state.length ? findMaxId(state) + 1 : 0,
-                    selected: false,
+                    selected: state.length ? false : true,
                     expanded: false
                 }
             ];
@@ -132,6 +141,14 @@ function categories(state = [], action) {
                     return Object.assign({}, category, { expanded: true});
                 }
                 return category;
+            });
+        case SELECT_CATEGORY:
+            return state.map(category => {
+                if (category.id === action.id) {
+                    return Object.assign({}, category, { selected: true });
+                } else {
+                    return Object.assign({}, category, { selected: false});
+                }
             });
         case REMOVE_CATEGORY:
             const index = state.findIndex( category => category.id === action.id);
@@ -150,6 +167,20 @@ function categories(state = [], action) {
     }
 }
 
+function modal(state = initialState.modal, action) {
+    switch (action.type) {
+        case SHOW_MODAL:
+            return {
+                modalType: action.modalType,
+                modalProps: action.modalProps
+            };
+        case HIDE_MODAL:
+            return initialState.modal;
+        default:
+            return state
+    }
+}
+
 function findMaxId(array) {
     return Math.max.apply(Math, array.map(object => object.id ));
 }
@@ -158,7 +189,8 @@ const todoApp = combineReducers({
     showDone,
     searchPhrase,
     todos,
-    categories
+    categories,
+    modal
 });
 
 export default todoApp

@@ -5,3 +5,18 @@
     padding-left: 6px;
     display: inline-block;
 }
+.category--selected {
+    background: #39cccc;
+    color: white;
+}
+.category--selected button {
+    background: white;
+    color: #39cccc;
+
+}
+.category button {
+    border: none;
+    padding: 0 5px;
+    height: 100%;
+    margin-right: 1px;
+}

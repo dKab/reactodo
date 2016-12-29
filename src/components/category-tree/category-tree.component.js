@@ -24,6 +24,7 @@ function renderTree(categories, allCategories, props, rendered = [], omitSubtree
                              onPlusClick={props.onAddChildCategory}
                              onTrashClick={props.onDeleteCategory}
                              onExpandClick={props.onCategoryExpandClick}
+                             onCategoryClick={props.onCategorySelect}
             />;
         };
         const children = allCategories.filter(category => category.parentId === cat.id);

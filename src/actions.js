@@ -12,6 +12,9 @@ export const REMOVE_CATEGORY = 'REMOVE_CATEGORY';
 export const TOGGLE_CATEGORY_EXPANDED_STATE = 'TOGGLE_CATEGORY_EXPANDED_STATE';
 export const CHANGE_TODO_CATEGORY =  'CHANGE_TODO_CATEGORY';
 export const EXPAND_CATEGORY = 'EXPAND_CATEGORY';
+export const SELECT_CATEGORY = 'SELECT_CATEGORY';
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';
 
 
 /*
@@ -54,6 +57,18 @@ export function expandCategory(id) {
     return { type: EXPAND_CATEGORY, id}
 }
 
+export function selectCategory(id) {
+    return {type: SELECT_CATEGORY, id }
+}
+
 export function changeTodoCategory(todoId, categoryId) {
     return {type: CHANGE_TODO_CATEGORY, todoId, categoryId};
+}
+
+export function showModal(modalType, modalProps) {
+    return { type: SHOW_MODAL, modalType, modalProps};
+}
+
+export function hideModal() {
+    return { type: HIDE_MODAL };
 }

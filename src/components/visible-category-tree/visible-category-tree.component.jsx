@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import CategoryTree from '../category-tree/category-tree.component';
 import { addCategory, removeCategory, toggleCategoryExpandedState,
-expandCategory } from '../../actions';
+expandCategory, selectCategory, showModal } from '../../actions';
+import {DELETE_MODAL} from '../modal-root/modal-root.component';
 
 
 const getVisibleCategories = (categories, phrase, showDone, todos) => {
@@ -44,19 +45,24 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onAddChildCategory: (parentId) => {
+		onAddChildCategory: (parentId, e) => {
 			const name = prompt('Enter category name: ');
 			if (!name) {
 				return;
 			}
 			dispatch(addCategory(name, parentId));
 			dispatch(expandCategory(parentId));
+			e.stopPropagation();
 		},
-		onDeleteCategory: (id) => {
-			confirm('Are you sure you want to delete category and all'
-					+ ' its children? Press "OK" to proceed with removal, otherwise press "Cancel"') && dispatch(removeCategory(id));
+		onDeleteCategory: (id, e) => {
+			dispatch(showModal(DELETE_MODAL, {categoryId: id}));
+			e.stopPropagation();
 		},
-		onCategoryExpandClick: (id) => dispatch(toggleCategoryExpandedState(id))
+		onCategoryExpandClick: (id, e) => {
+			dispatch(toggleCategoryExpandedState(id));
+			e.stopPropagation();
+		},
+		onCategorySelect: (id) => dispatch(selectCategory(id))
 	}
 };
 

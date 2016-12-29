@@ -73,3 +73,6 @@ html, body, #root, .app-container {
 #root > [data-reactroot] {
   height: 100%;
 }
+button, .btn {
+  cursor: pointer;
+}

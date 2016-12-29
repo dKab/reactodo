@@ -5,6 +5,7 @@ import AddCategory from '../add-category/add-category.component';
 import AddItem from '../add-item/add-item.component';
 import TodoList from '../todo-list/todo-list.component';
 import VisibleCategoryTree from '../visible-category-tree/visible-category-tree.component';
+import ModalRoot from '../modal-root/modal-root.component';
 
 export class Listview extends React.Component {
 
@@ -36,6 +37,7 @@ export class Listview extends React.Component {
                         <TodoList />
                     </div>
                 </div>
+                <ModalRoot />
             </div>
             );
     }
