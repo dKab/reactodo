@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import CategoryTree from '../category-tree/category-tree.component';
-import { addCategory, toggleCategoryExpandedState, selectCategory, showModal } from '../../actions';
-import {DELETE_MODAL, CREATE_MODAL} from '../modal-root/modal-root.component';
+import { toggleCategoryExpandedState, selectCategory, showModal} from '../../actions';
+import {DELETE_MODAL, ADD_CATEGORY_MODAL, CHANGE_CATEGORY_NAME_MODAL } from '../modal-root/modal-root.component';
+import {DETAIL_MODE, LIST_MODE} from '../category/category.component';
 
 
 const getVisibleCategories = (categories, phrase, showDone, todos) => {
@@ -36,16 +37,17 @@ function getCategoryTodos(category, todos) {
 	return todos.filter(todo => todo.categoryId === category.id);
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
 	return {
-		categories: getVisibleCategories(state.categories, state.searchPhrase, state.showDone, state.todos)
-	}
+		categories: getVisibleCategories(state.categories, state.searchPhrase, state.showDone, state.todos),
+		categoriesMode: ownProps.pathname === '/' ? LIST_MODE : DETAIL_MODE
+	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onAddChildCategory: (parentId, e) => {
-			dispatch(showModal(CREATE_MODAL, {parentId}));
+			dispatch(showModal(ADD_CATEGORY_MODAL, {parentId}));
 			e.stopPropagation();
 		},
 		onDeleteCategory: (id, e) => {
@@ -56,7 +58,11 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(toggleCategoryExpandedState(id));
 			e.stopPropagation();
 		},
-		onCategorySelect: (id) => dispatch(selectCategory(id))
+		onCategorySelect: (id) => dispatch(selectCategory(id)),
+		onCategoryEdit: (id, e) =>  {
+			dispatch(showModal(CHANGE_CATEGORY_NAME_MODAL, {id}));
+			e.stopPropagation();
+		}
 	}
 };
 

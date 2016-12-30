@@ -15,7 +15,7 @@ export const EXPAND_CATEGORY = 'EXPAND_CATEGORY';
 export const SELECT_CATEGORY = 'SELECT_CATEGORY';
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
-
+export const CHANGE_CATEGORY_NAME = 'CHANGE_CATEGORY_NAME';
 
 /*
  * action creators
@@ -71,4 +71,8 @@ export function showModal(modalType, modalProps) {
 
 export function hideModal() {
     return { type: HIDE_MODAL };
+}
+
+export function changeCategoryName(id, newName) {
+    return {type: CHANGE_CATEGORY_NAME,  id, newName};
 }

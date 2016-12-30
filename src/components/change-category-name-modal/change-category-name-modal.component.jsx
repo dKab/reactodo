@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
 import Modal from '../modal/modal.component';
-import { addCategory, expandCategory, hideModal } from '../../actions';
+import { hideModal, changeCategoryName } from '../../actions';
 import React from 'react';
 
-class CreateCategoryModal extends React.Component {
+class ChangeCategoryNameModal extends React.Component {
 
     constructor(props) {
         super(props);
         this.cancelBtnText = 'Cancel';
-        this.confirmBtnText = 'Add';
+        this.confirmBtnText = 'Rename';
     }
 
     render() {
@@ -17,7 +17,7 @@ class CreateCategoryModal extends React.Component {
                    onCancel={this.props.onCancel}
                    confirmBtnText={this.confirmBtnText}
                    cancelBtnText={this.cancelBtnText}>
-                Enter new category name:<br/>
+                Enter new name for a category:<br/>
                 <input style={{border: '1px solid gray'}} type="text" ref={(input) => this.input = input} />
             </Modal>);
     }
@@ -26,8 +26,7 @@ class CreateCategoryModal extends React.Component {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onConfirm: (name) => {
-            dispatch(addCategory(name, ownProps.parentId));
-            dispatch(expandCategory(ownProps.parentId));
+            dispatch(changeCategoryName(ownProps.id, name))
             dispatch(hideModal());
         },
         onCancel: () => dispatch(hideModal())
@@ -37,4 +36,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default connect(
     () => {return {}},
     mapDispatchToProps
-)(CreateCategoryModal);
+)(ChangeCategoryNameModal);

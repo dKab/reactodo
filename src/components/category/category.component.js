@@ -7,7 +7,10 @@ import Plus from 'react-icons/fa/plus-square-o';
 import Move from 'react-icons/fa/mail-reply';
 import './category.css';
 
-export default function Category(props) {
+export const LIST_MODE = 'LIST_MODE';
+export const DETAIL_MODE = 'DETAIL_MODE';
+
+export function Category(props) {
 
     let expandButton = null,
         isLeaf = props.isLeaf;
@@ -30,11 +33,14 @@ export default function Category(props) {
         <div className={classes.join(' ')} onClick={() => props.onCategoryClick(props.category.id)}>
             {expandButton}
                 <span className="category__name">{props.category.name}</span>
-                <span className="category__edit-btn"><Edit /></span>
+                <span className="category__edit-btn btn" onClick={(e) => props.onEditClick(props.category.id, e)}><Edit /></span>
                 <div className="fr">
-                    <span className="category__remove-btn" onClick={(e) => props.onTrashClick(props.category.id, e)}><Remove /></span>
-                    <span className="category__add-btn" onClick={(e) => props.onPlusClick(props.category.id, e)}><Plus /></span>
-                    <button className="category__move-btn"><Move /></button>
+                    {props.mode === LIST_MODE &&
+                    (<div><span className="category__remove-btn btn"
+                                onClick={(e) => props.onTrashClick(props.category.id, e)}><Remove /></span>
+                        <span className="category__add-btn btn"
+                              onClick={(e) => props.onPlusClick(props.category.id, e)}><Plus /></span></div>)}
+                    {props.mode === DETAIL_MODE && <button className="category__move-btn btn"><Move /></button>}
                 </div>
         </div>
     );

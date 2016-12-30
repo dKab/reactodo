@@ -11,7 +11,7 @@ const mapStateToProps = () => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onButtonClick: (name) => {
-            dispatch(addCategory(name, null))
+            name && dispatch(addCategory(name, null))
         }
     }
 };

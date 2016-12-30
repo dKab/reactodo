@@ -1,14 +1,17 @@
 import DeleteCategoryModal from '../delete-category-modal/delete-category-modal.component';
-import CreateCategoryModal from '../create-category-modal/create-category-modal.component';
+import AddCategoryModal from '../add-category-modal/add-category-modal.component';
+import ChangeCategoryNameModal from '../change-category-name-modal/change-category-name-modal.component';
 import React from 'react';
 import {connect} from 'react-redux';
 
 export const DELETE_MODAL = 'DELETE_MODAL';
-export const CREATE_MODAL = 'CREATE_MODAL';
+export const ADD_CATEGORY_MODAL = 'ADD_CATEGORY_MODAL';
+export const CHANGE_CATEGORY_NAME_MODAL = 'CHANGE_CATEGORY_NAME_MODAL';
 
 const MODAL_COMPONENTS = {
     [DELETE_MODAL]: DeleteCategoryModal,
-    [CREATE_MODAL]: CreateCategoryModal
+    [ADD_CATEGORY_MODAL]: AddCategoryModal,
+    [CHANGE_CATEGORY_NAME_MODAL]: ChangeCategoryNameModal
 };
 
 const ModalRoot = ({ modalType, modalProps }) => {

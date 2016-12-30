@@ -1,5 +1,5 @@
 import React from 'react';
-import Category from '../category/category.component';
+import {Category} from '../category/category.component';
 
 export default function CategoryTree(props) {
     const elems = renderTree(props.categories, props.categories, props);
@@ -25,6 +25,8 @@ function renderTree(categories, allCategories, props, rendered = [], omitSubtree
                              onTrashClick={props.onDeleteCategory}
                              onExpandClick={props.onCategoryExpandClick}
                              onCategoryClick={props.onCategorySelect}
+                             onEditClick={props.onCategoryEdit}
+                             mode={props.categoriesMode}
             />;
         };
         const children = allCategories.filter(category => category.parentId === cat.id);

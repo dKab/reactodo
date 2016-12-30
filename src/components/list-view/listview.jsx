@@ -30,7 +30,7 @@ export class Listview extends React.Component {
                 </div>
                 {this.props.children}
                 <div className="categories-left">
-                    <VisibleCategoryTree />
+                    <VisibleCategoryTree pathname={this.props.location.pathname} />
                 </div>
                 <div className="todos-container">
                     <div id="list-view">

@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import { ADD_TODO, TOGGLE_TODO, TOGGLE_VISIBILITY_FILTER,
     TOGGLE_CATEGORY_EXPANDED_STATE, SEARCH_PHRASE_CHANGE, ADD_CATEGORY,
     TODO_CHANGE, CHANGE_TODO_CATEGORY, REMOVE_CATEGORY, EXPAND_CATEGORY, SELECT_CATEGORY,
-SHOW_MODAL, HIDE_MODAL } from './actions';
+SHOW_MODAL, HIDE_MODAL, CHANGE_CATEGORY_NAME } from './actions';
 
 
 /**
@@ -153,6 +153,13 @@ function categories(state = [], action) {
         case REMOVE_CATEGORY:
             const index = state.findIndex( category => category.id === action.id);
             return removeChildrenRec(action.id, state);
+        case CHANGE_CATEGORY_NAME:
+            return state.map(category => {
+                if (category.id === action.id) {
+                    return Object.assign({}, category, {name: action.newName});
+                }
+                return category;
+            });
         default:
             return state;
     }
