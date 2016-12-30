@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
 import CategoryTree from '../category-tree/category-tree.component';
-import { addCategory, removeCategory, toggleCategoryExpandedState,
-expandCategory, selectCategory, showModal } from '../../actions';
-import {DELETE_MODAL} from '../modal-root/modal-root.component';
+import { addCategory, toggleCategoryExpandedState, selectCategory, showModal } from '../../actions';
+import {DELETE_MODAL, CREATE_MODAL} from '../modal-root/modal-root.component';
 
 
 const getVisibleCategories = (categories, phrase, showDone, todos) => {
@@ -46,12 +45,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onAddChildCategory: (parentId, e) => {
-			const name = prompt('Enter category name: ');
-			if (!name) {
-				return;
-			}
-			dispatch(addCategory(name, parentId));
-			dispatch(expandCategory(parentId));
+			dispatch(showModal(CREATE_MODAL, {parentId}));
 			e.stopPropagation();
 		},
 		onDeleteCategory: (id, e) => {

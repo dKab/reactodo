@@ -1,18 +1,15 @@
 import DeleteCategoryModal from '../delete-category-modal/delete-category-modal.component';
-//import CreateCategoryModal from '../create-category-modal/create-category-modal.component';
+import CreateCategoryModal from '../create-category-modal/create-category-modal.component';
 import React from 'react';
 import {connect} from 'react-redux';
 
 export const DELETE_MODAL = 'DELETE_MODAL';
 export const CREATE_MODAL = 'CREATE_MODAL';
 
-//const MODAL_COMPONENTS = {
-//    DELETE_MODAL: DeleteCategoryModal,
-//    CREATE_MODAL: CreateCategoryModal
-//};
-const MODAL_COMPONENTS = {};
-MODAL_COMPONENTS[DELETE_MODAL] = DeleteCategoryModal;
-MODAL_COMPONENTS[CREATE_MODAL] = () => null;
+const MODAL_COMPONENTS = {
+    [DELETE_MODAL]: DeleteCategoryModal,
+    [CREATE_MODAL]: CreateCategoryModal
+};
 
 const ModalRoot = ({ modalType, modalProps }) => {
     const overlayStyles = {
