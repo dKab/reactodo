@@ -1,8 +1,10 @@
 import { connect } from 'react-redux';
 import CategoryTree from '../category-tree/category-tree.component';
-import { toggleCategoryExpandedState, selectCategory, showModal} from '../../actions';
+import { toggleCategoryExpandedState, selectCategory, addCategory} from '../../actions';
 import {DELETE_MODAL, ADD_CATEGORY_MODAL, CHANGE_CATEGORY_NAME_MODAL } from '../modal-root/modal-root.component';
 import {DETAIL_MODE, LIST_MODE} from '../category/category.component';
+//import { browserHistory } from 'react-router';
+import {compose} from 'redux';
 
 
 const getVisibleCategories = (categories, phrase, showDone, todos) => {
@@ -38,29 +40,34 @@ function getCategoryTodos(category, todos) {
 }
 
 const mapStateToProps = (state, ownProps) => {
+
 	return {
-		categories: getVisibleCategories(state.categories, state.searchPhrase, state.showDone, state.todos),
+		categories: getVisibleCategories(state.present.categories, state.present.searchPhrase, state.present.showDone, state.present.todos),
 		categoriesMode: ownProps.pathname === '/' ? LIST_MODE : DETAIL_MODE
 	};
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
-		onAddChildCategory: (parentId, e) => {
-			dispatch(showModal(ADD_CATEGORY_MODAL, {parentId}));
-			e.stopPropagation();
+		onAddChildCategory: (name, parentId) => {
+			dispatch(addCategory(name, parentId));
 		},
 		onDeleteCategory: (id, e) => {
-			dispatch(showModal(DELETE_MODAL, {categoryId: id}));
+			//dispatch(showModal(DELETE_MODAL, {categoryId: id}));
 			e.stopPropagation();
 		},
 		onCategoryExpandClick: (id, e) => {
 			dispatch(toggleCategoryExpandedState(id));
 			e.stopPropagation();
 		},
-		onCategorySelect: (id) => dispatch(selectCategory(id)),
+		onCategorySelect: (id) => {
+			dispatch(selectCategory(id));
+			if (ownProps.pathname === '/') {
+				//browserHistory.push('/')
+			}
+		},
 		onCategoryEdit: (id, e) =>  {
-			dispatch(showModal(CHANGE_CATEGORY_NAME_MODAL, {id}));
+			//dispatch(showModal(CHANGE_CATEGORY_NAME_MODAL, {id}));
 			e.stopPropagation();
 		}
 	}

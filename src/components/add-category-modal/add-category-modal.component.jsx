@@ -1,9 +1,8 @@
-import { connect } from 'react-redux';
 import Modal from '../modal/modal.component';
-import { addCategory, expandCategory, hideModal} from '../../actions';
 import React from 'react';
 
-class AddCategoryModal extends React.Component {
+
+export class AddCategoryModal extends React.Component {
     constructor(props) {
         super(props);
         this.cancelBtnText = 'Cancel';
@@ -21,19 +20,3 @@ class AddCategoryModal extends React.Component {
             </Modal>);
     }
 }
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        onConfirm: (name) => {
-            dispatch(addCategory(name, ownProps.parentId));
-            dispatch(expandCategory(ownProps.parentId));
-            dispatch(hideModal());
-        },
-        onCancel: () => dispatch(hideModal())
-    }
-};
-
-export default connect(
-    () => {return {}},
-    mapDispatchToProps
-)(AddCategoryModal);

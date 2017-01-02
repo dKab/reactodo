@@ -46,6 +46,6 @@ const ModalRoot = ({ modalType, modalProps }) => {
 };
 
 export default connect(
-    state => state.modal
+    state => state.present.modal
 )(ModalRoot);
 

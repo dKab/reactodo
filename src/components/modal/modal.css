@@ -28,3 +28,7 @@
 .modal__body {
     padding: 10px;
 }
+
+.modal input[type=text] {
+    width: 100%;
+}

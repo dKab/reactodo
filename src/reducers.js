@@ -11,48 +11,44 @@ SHOW_MODAL, HIDE_MODAL, CHANGE_CATEGORY_NAME } from './actions';
  * @param action
  * @returns {boolean}
  */
-const state = {
-    showDone: false,
-    searchPhrase: '',
-    categories: [
-        {
-            name: 'category1',
-            id: 1,
-            selected: false,
-            parentId: null,
-            expanded: true
-        },
-        {
-            name: 'category1_1',
-            id: 2,
-            selected: false,
-            parentId: 1
-        }
-    ],
-    todos: [
-        {
-            id: 1,
-            name: 'Consider using Redux',
-            description: 'text',
-            done: false,
-            categoryId: 2
-        }
-    ],
-    modal: {
-        modalType: null,
-        modalProps: {}
-    }
-};
+//const state = {
+//    showDone: false,
+//    searchPhrase: '',
+//    categories: [
+//        {
+//            name: 'category1',
+//            id: 1,
+//            selected: false,
+//            parentId: null,
+//            expanded: true
+//        },
+//        {
+//            name: 'category1_1',
+//            id: 2,
+//            selected: false,
+//            parentId: 1
+//        }
+//    ],
+//    todos: [
+//        {
+//            id: 1,
+//            name: 'Consider using Redux',
+//            description: 'text',
+//            done: false,
+//            categoryId: 2
+//        }
+//    ],
+//    modal: {
+//        modalType: null,
+//        modalProps: {}
+//    }
+//};
 
 const initialState = {
     showDone: false,
     searchPhrase: '',
     categories: [],
-    todos: [],
-    modal: {
-        modalType: null,
-        modalProps: {}
-    }
+    todos: []
 };
 
 
@@ -118,7 +114,7 @@ function todos(state = [], action) {
 function categories(state = [], action) {
     switch (action.type) {
         case ADD_CATEGORY:
-            return [
+            const newState = [
                 ...state,
                 {
                     name: action.name,
@@ -128,17 +124,17 @@ function categories(state = [], action) {
                     expanded: false
                 }
             ];
+
+            return newState.map((cat) => {
+            if (cat.id === action.parentId) {
+                return {...cat, expanded: true}
+            }
+            return cat;
+        });
         case TOGGLE_CATEGORY_EXPANDED_STATE:
             return state.map(category => {
                 if (category.id === action.id) {
                     return Object.assign({}, category, {expanded: !category.expanded});
-                }
-                return category;
-            });
-        case EXPAND_CATEGORY:
-            return state.map(category => {
-                if (category.id === action.id) {
-                    return Object.assign({}, category, { expanded: true});
                 }
                 return category;
             });
@@ -151,7 +147,6 @@ function categories(state = [], action) {
                 }
             });
         case REMOVE_CATEGORY:
-            const index = state.findIndex( category => category.id === action.id);
             return removeChildrenRec(action.id, state);
         case CHANGE_CATEGORY_NAME:
             return state.map(category => {
@@ -196,8 +191,56 @@ const todoApp = combineReducers({
     showDone,
     searchPhrase,
     todos,
-    categories,
-    modal
+    categories
 });
 
-export default todoApp
+//const undoableTodoApp = undoable(todoApp);
+
+
+export default undoable(todoApp);
+
+function undoable(reducer) {
+    // Call the reducer with empty action to populate the initial state
+    const initialState = {
+        past: [],
+        present: reducer(undefined, {}),
+        future: []
+    };
+
+    // Return a reducer that handles undo and redo
+    return function (state = initialState, action) {
+        const { past, present, future } = state;
+
+        switch (action.type) {
+            case 'UNDO':
+                const previous = past[past.length - 1];
+                const newPast = past.slice(0, past.length - 1);
+                return {
+                    past: newPast,
+                    present: previous,
+                    future: [ present, ...future ]
+                };
+            case 'REDO':
+                const next = future[0];
+                const newFuture = future.slice(1);
+                return {
+                    past: [ ...past, present ],
+                    present: next,
+                    future: newFuture
+                };
+            default:
+                // Delegate handling the action to the passed reducer
+                const newPresent = reducer(present, action);
+                if (present === newPresent) {
+                    return state
+                }
+                const newState =  {
+                    past: [ ...past, present ],
+                    present: newPresent,
+                    future: []
+                };
+                console.log(newState);
+                return newState;
+        }
+    }
+}

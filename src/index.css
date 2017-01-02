@@ -73,6 +73,14 @@ html, body, #root, .app-container {
 #root > [data-reactroot] {
   height: 100%;
 }
-button, .btn {
+button, .btn[disabled] {
   cursor: pointer;
+}
+.undo-redo {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+}
+.undo-redo button {
+  margin-left: 10px;
 }

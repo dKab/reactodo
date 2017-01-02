@@ -13,7 +13,7 @@ const DeleteCategoryModal = ({ categoryName, onConfirm, onCancel }) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-     return {categoryName: state.categories.find((cat) => cat.id === ownProps.categoryId).name};
+     return {categoryName: state.present.categories.find((cat) => cat.id === ownProps.categoryId).name};
 };
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
