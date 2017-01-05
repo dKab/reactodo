@@ -19,6 +19,7 @@ function renderTree(categories, allCategories, props, rendered = [], omitSubtree
 
     return categories.map((cat) => {
         let renderCategory = (isLeaf) => {
+            const selected = props.selectedCategory === cat.id;
             return <Category category={cat}
                              isLeaf={isLeaf}
                              onPlusClick={props.onAddChildCategory}
@@ -27,6 +28,7 @@ function renderTree(categories, allCategories, props, rendered = [], omitSubtree
                              onCategoryClick={props.onCategorySelect}
                              onEditClick={props.onCategoryEdit}
                              mode={props.categoriesMode}
+                             selected={selected}
             />;
         };
         const children = allCategories.filter(category => category.parentId === cat.id);

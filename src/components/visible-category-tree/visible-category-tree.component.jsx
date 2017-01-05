@@ -1,13 +1,16 @@
 import { connect } from 'react-redux';
 import CategoryTree from '../category-tree/category-tree.component';
-import { toggleCategoryExpandedState, selectCategory, addCategory} from '../../actions';
-import {DELETE_MODAL, ADD_CATEGORY_MODAL, CHANGE_CATEGORY_NAME_MODAL } from '../modal-root/modal-root.component';
+import { toggleCategoryExpandedState,
+		changeCategoryName,
+		addCategory,
+		removeCategory,
+		push} from '../../actions';
 import {DETAIL_MODE, LIST_MODE} from '../category/category.component';
-//import { browserHistory } from 'react-router';
-import {compose} from 'redux';
-
+import {browserHistory} from 'react-router';
+import {URLValueMap, SHOW_DONE_DEFAULT_VALUE} from '../search/search.component.jsx';
 
 const getVisibleCategories = (categories, phrase, showDone, todos) => {
+
 	const visible = showDone ? categories : categories.filter(category => isCategoryDone(category, categories, todos));
 	if (phrase !== '') {
 		return visible.filter((cat) => cat.name.indexOf(phrase) >= 0);
@@ -40,10 +43,12 @@ function getCategoryTodos(category, todos) {
 }
 
 const mapStateToProps = (state, ownProps) => {
-
+	const showDone = ownProps.location.query.showDone ? URLValueMap.get(ownProps.location.query.showDone) : SHOW_DONE_DEFAULT_VALUE,
+			phrase = typeof ownProps.location.query.searchPhrase === 'undefined' ? '' :	 ownProps.location.query.searchPhrase;
 	return {
-		categories: getVisibleCategories(state.present.categories, state.present.searchPhrase, state.present.showDone, state.present.todos),
-		categoriesMode: ownProps.pathname === '/' ? LIST_MODE : DETAIL_MODE
+		selectedCategory: +ownProps.location.query.category,
+		categories: getVisibleCategories(state.present.categories, phrase, showDone, state.present.todos),
+		categoriesMode: ownProps.location.pathname === '/' ? LIST_MODE : DETAIL_MODE
 	};
 };
 
@@ -52,23 +57,20 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		onAddChildCategory: (name, parentId) => {
 			dispatch(addCategory(name, parentId));
 		},
-		onDeleteCategory: (id, e) => {
-			//dispatch(showModal(DELETE_MODAL, {categoryId: id}));
-			e.stopPropagation();
+		onDeleteCategory: (id) => {
+			dispatch(removeCategory(id));
 		},
 		onCategoryExpandClick: (id, e) => {
 			dispatch(toggleCategoryExpandedState(id));
 			e.stopPropagation();
 		},
 		onCategorySelect: (id) => {
-			dispatch(selectCategory(id));
-			if (ownProps.pathname === '/') {
-				//browserHistory.push('/')
+			if (ownProps.location.pathname === '/') {
+				dispatch(push({ ...ownProps.location, query: {...ownProps.location.query, category: id}}));
 			}
 		},
-		onCategoryEdit: (id, e) =>  {
-			//dispatch(showModal(CHANGE_CATEGORY_NAME_MODAL, {id}));
-			e.stopPropagation();
+		onCategoryEdit: (id, name) =>  {
+			dispatch(changeCategoryName(id, name));
 		}
 	}
 };

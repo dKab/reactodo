@@ -6,19 +6,25 @@ import Remove from 'react-icons/fa/trash';
 import Plus from 'react-icons/fa/plus-square-o';
 import Move from 'react-icons/fa/mail-reply';
 import './category.css';
-import Modal from 'react-modal';
+import Portal from 'react-modal';
+import {DeleteCategoryModal} from '../delete-category-modal/delete-category-modal.component';
+import {AddCategoryModal} from '../add-category-modal/add-category-modal.component';
+import {ChangeCategoryNameModal} from '../change-category-name-modal/change-category-name-modal.component';
 
 export const LIST_MODE = 'LIST_MODE';
 export const DETAIL_MODE = 'DETAIL_MODE';
-import {AddCategoryModal} from '../add-category-modal/add-category-modal.component';
+const ADD_MODAL = 'ADD_MODAL';
+const DELETE_MODAL = 'DELETE_MODAL';
+const EDIT_MODAL = 'EDIT_MODAL';
 
 export class Category extends React.Component {
 
-
     constructor(props) {
-        super();
+        super(props);
         this.state = {
-
+            [ADD_MODAL]: false,
+            [ADD_MODAL]: false,
+            [EDIT_MODAL]: false
         };
         this.modalStyles = {
             content : {
@@ -33,21 +39,29 @@ export class Category extends React.Component {
         };
     }
 
-    showAddModal(e) {
-        this.setState({addSubCategegoryModalOpened: true});
+    showModal(e, modal) {
+        this.setState({...this.state, [modal]: true});
         e.stopPropagation();
     }
 
-    confirmAndCloseAddModal(name) {
+    confirmAddAndHideModal(name) {
         this.props.onPlusClick(name, this.props.category.id);
-        this.hideAddModal();
+        this.hideModal(ADD_MODAL);
     }
 
-    hideAddModal() {
-        this.setState({addSubCategegoryModalOpened: false});
+    confirmDeleteAndHideModal() {
+        this.props.onTrashClick(this.props.category.id);
+        this.hideModal(DELETE_MODAL);
     }
 
+    confirmEditAndHideModal(name) {
+        this.props.onEditClick(this.props.category.id, name);
+        this.hideModal(EDIT_MODAL);
+    }
 
+    hideModal(modal) {
+        this.setState({...this.state, [modal]: false});
+    }
 
     render() {
         let expandButton = null,
@@ -63,7 +77,7 @@ export class Category extends React.Component {
         if (isLeaf && this.props.category.parentId !== null) {
             classes.push('category--leaf');
         }
-        if (this.props.category.selected) {
+        if (this.props.selected) {
             classes.push('category--selected');
         }
 
@@ -71,18 +85,28 @@ export class Category extends React.Component {
             <div className={classes.join(' ')} onClick={() => this.props.onCategoryClick(this.props.category.id)}>
                 {expandButton}
                 <span className="category__name">{this.props.category.name}</span>
-                <span className="category__edit-btn btn" onClick={(e) => this.props.onEditClick(this.props.category.id, e)}><Edit /></span>
+                <span className="category__edit-btn btn" onClick={(e) => this.showModal(e, EDIT_MODAL)}><Edit /></span>
                 <div className="fr">
                     {this.props.mode === LIST_MODE &&
                     (<div><span className="category__remove-btn btn"
-                                onClick={(e) => this.props.onTrashClick(this.props.category.id, e)}><Remove /></span>
+                                onClick={(e) => this.showModal(e, DELETE_MODAL)}><Remove /></span>
                         <span className="category__add-btn btn"
-                              onClick={(e) => this.showAddModal(e)}><Plus /></span></div>)}
+                              onClick={(e) => this.showModal(e, ADD_MODAL)}><Plus /></span></div>)}
                     {this.props.mode === DETAIL_MODE && <button className="category__move-btn btn"><Move /></button>}
                 </div>
-                <Modal style={this.modalStyles} contentLabel="modal" isOpen={this.state.addSubCategegoryModalOpened}>
-                    <AddCategoryModal onCancel={() => this.hideAddModal()} onConfirm={this.confirmAndCloseAddModal.bind(this)} />
-                </Modal>
+                <Portal style={this.modalStyles} contentLabel="modal" isOpen={this.state[ADD_MODAL]}>
+                    <AddCategoryModal onCancel={() => this.hideModal(ADD_MODAL)} onConfirm={this.confirmAddAndHideModal.bind(this)} />
+                </Portal>
+                <Portal style={this.modalStyles} contentLabel="modal" isOpen={this.state[DELETE_MODAL]}>
+                    <DeleteCategoryModal onCancel={() => this.hideModal(DELETE_MODAL)}
+                         onConfirm={this.confirmDeleteAndHideModal.bind(this)}
+                         categoryName={this.props.category.name} />
+                </Portal>
+                <Portal style={this.modalStyles} contentLabel="modal" isOpen={this.state[EDIT_MODAL]}>
+                    <ChangeCategoryNameModal  onCancel={()=>this.hideModal(EDIT_MODAL)}
+                        onConfirm={this.confirmEditAndHideModal.bind(this)}
+                    />
+                </Portal>
             </div>
         );
     }

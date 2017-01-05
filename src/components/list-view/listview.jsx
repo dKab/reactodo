@@ -1,6 +1,6 @@
 import React from 'react';
 import Progressbar from '../progressbar/progressbar.component.js';
-import Search from '../search/search.component';
+import {Search} from '../search/search.component.jsx';
 import AddCategory from '../add-category/add-category.component';
 import AddItem from '../add-item/add-item.component';
 import TodoList from '../todo-list/todo-list.component';
@@ -21,7 +21,7 @@ export class Listview extends React.Component {
             <div>
                 <div className="clearfix">
                     <div className="logo">Todo list</div>
-                    <Search />
+                    <Search location={this.props.location} />
                 </div>
                 <Progressbar progress={this.state.progress}/>
                 <div className="top">
@@ -30,7 +30,7 @@ export class Listview extends React.Component {
                 </div>
                 {this.props.children}
                 <div className="categories-left">
-                    <VisibleCategoryTree pathname={this.props.location.pathname} />
+                    <VisibleCategoryTree location={this.props.location} />
                 </div>
                 <div className="todos-container">
                     <div id="list-view">

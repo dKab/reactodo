@@ -1,6 +1,7 @@
 .search__clear {
     margin-left: -15px;
     vertical-align: bottom;
+    cursor: pointer;
 }
 .search > * {
     display: inline-block;

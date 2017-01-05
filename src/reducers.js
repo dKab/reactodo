@@ -1,9 +1,10 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
+import {routerReducer} from 'react-router-redux';
 import { ADD_TODO, TOGGLE_TODO, TOGGLE_VISIBILITY_FILTER,
     TOGGLE_CATEGORY_EXPANDED_STATE, SEARCH_PHRASE_CHANGE, ADD_CATEGORY,
-    TODO_CHANGE, CHANGE_TODO_CATEGORY, REMOVE_CATEGORY, EXPAND_CATEGORY, SELECT_CATEGORY,
+    TODO_CHANGE, CHANGE_TODO_CATEGORY, REMOVE_CATEGORY,
 SHOW_MODAL, HIDE_MODAL, CHANGE_CATEGORY_NAME } from './actions';
-
+import {LOCATION_CHANGE} from 'react-router-redux';
 
 /**
  * This is just to visualize state structure
@@ -45,30 +46,9 @@ SHOW_MODAL, HIDE_MODAL, CHANGE_CATEGORY_NAME } from './actions';
 //};
 
 const initialState = {
-    showDone: false,
-    searchPhrase: '',
     categories: [],
     todos: []
 };
-
-
-function showDone(state = false, action) {
-    switch (action.type) {
-        case TOGGLE_VISIBILITY_FILTER:
-            return !state;
-        default:
-            return state
-    }
-}
-
-function searchPhrase(state = '', action) {
-    switch (action.type) {
-        case SEARCH_PHRASE_CHANGE:
-            return action.phrase;
-        default:
-            return state;
-    }
-}
 
 function todos(state = [], action) {
     switch (action.type) {
@@ -86,9 +66,7 @@ function todos(state = [], action) {
         case TOGGLE_TODO:
             return state.map(todo => {
                 if (todo.id === action.id) {
-                    return Object.assign({}, todo, {
-                        done: !todo.done
-                    });
+                    return {...todo, done: !todo.done };
                 }
                 return todo
             });
@@ -102,7 +80,7 @@ function todos(state = [], action) {
         case CHANGE_TODO_CATEGORY:
             return state.map(todo => {
                 if (todo.id === action.todoId) {
-                    return Object.assign({}, todo, { categoryId: action.categoryId });
+                    return {...todo, categoryId: action.categoryId };
                 }
                 return todo;
             });
@@ -134,24 +112,16 @@ function categories(state = [], action) {
         case TOGGLE_CATEGORY_EXPANDED_STATE:
             return state.map(category => {
                 if (category.id === action.id) {
-                    return Object.assign({}, category, {expanded: !category.expanded});
+                    return {...category, expanded: !category.expanded};
                 }
                 return category;
-            });
-        case SELECT_CATEGORY:
-            return state.map(category => {
-                if (category.id === action.id) {
-                    return Object.assign({}, category, { selected: true });
-                } else {
-                    return Object.assign({}, category, { selected: false});
-                }
             });
         case REMOVE_CATEGORY:
             return removeChildrenRec(action.id, state);
         case CHANGE_CATEGORY_NAME:
             return state.map(category => {
                 if (category.id === action.id) {
-                    return Object.assign({}, category, {name: action.newName});
+                    return {...category, name: action.newName};
                 }
                 return category;
             });
@@ -169,33 +139,15 @@ function categories(state = [], action) {
     }
 }
 
-function modal(state = initialState.modal, action) {
-    switch (action.type) {
-        case SHOW_MODAL:
-            return {
-                modalType: action.modalType,
-                modalProps: action.modalProps
-            };
-        case HIDE_MODAL:
-            return initialState.modal;
-        default:
-            return state
-    }
-}
-
 function findMaxId(array) {
     return Math.max.apply(Math, array.map(object => object.id ));
 }
 
 const todoApp = combineReducers({
-    showDone,
-    searchPhrase,
     todos,
-    categories
+    categories,
+    routing: routerReducer
 });
-
-//const undoableTodoApp = undoable(todoApp);
-
 
 export default undoable(todoApp);
 
@@ -210,7 +162,7 @@ function undoable(reducer) {
     // Return a reducer that handles undo and redo
     return function (state = initialState, action) {
         const { past, present, future } = state;
-
+        console.log(action);
         switch (action.type) {
             case 'UNDO':
                 const previous = past[past.length - 1];
@@ -234,8 +186,9 @@ function undoable(reducer) {
                 if (present === newPresent) {
                     return state
                 }
+                const initialLocationChange = (action.type === LOCATION_CHANGE) && !present.routing.locationBeforeTransitions;
                 const newState =  {
-                    past: [ ...past, present ],
+                    past: initialLocationChange ? past : [ ...past, present ],
                     present: newPresent,
                     future: []
                 };

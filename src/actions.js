@@ -11,12 +11,12 @@ export const ADD_CATEGORY = 'ADD_CATEGORY';
 export const REMOVE_CATEGORY = 'REMOVE_CATEGORY';
 export const TOGGLE_CATEGORY_EXPANDED_STATE = 'TOGGLE_CATEGORY_EXPANDED_STATE';
 export const CHANGE_TODO_CATEGORY =  'CHANGE_TODO_CATEGORY';
-export const SELECT_CATEGORY = 'SELECT_CATEGORY';
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 export const CHANGE_CATEGORY_NAME = 'CHANGE_CATEGORY_NAME';
 export const UNDO = 'UNDO';
 export const REDO = 'REDO';
+export {push} from 'react-router-redux';
 
 /*
  * action creators
@@ -54,20 +54,8 @@ export function toggleCategoryExpandedState(id) {
     return { type: TOGGLE_CATEGORY_EXPANDED_STATE, id}
 }
 
-export function selectCategory(id) {
-    return {type: SELECT_CATEGORY, id }
-}
-
 export function changeTodoCategory(todoId, categoryId) {
     return {type: CHANGE_TODO_CATEGORY, todoId, categoryId};
-}
-
-export function showModal(modalType, modalProps) {
-    return { type: SHOW_MODAL, modalType, modalProps};
-}
-
-export function hideModal() {
-    return { type: HIDE_MODAL };
 }
 
 export function changeCategoryName(id, newName) {
@@ -80,11 +68,4 @@ export function undo() {
 
 export function redo() {
     return {type: REDO };
-}
-
-export function incomplete(action) {
-    return {...action, meta: {incomplete: true }};
-}
-export function completeComposedAction(action) {
-    return {...action, meta: { completed: true }};
 }
