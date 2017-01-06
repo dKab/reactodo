@@ -1,4 +1,4 @@
-import Modal from '../modal/modal.component';
+import {Modal} from '../modal/modal.component';
 import React from 'react';
 
 

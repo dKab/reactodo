@@ -4,15 +4,11 @@
 
 export const ADD_TODO = 'ADD_TODO';
 export const TOGGLE_TODO = 'TOGGLE_TODO';
-export const TOGGLE_VISIBILITY_FILTER = 'TOGGLE_VISIBILITY_FILTER';
-export const SEARCH_PHRASE_CHANGE = 'SEARCH_PHRASE_CHANGE';
 export const TODO_CHANGE = 'TODO_CHANGE';
 export const ADD_CATEGORY = 'ADD_CATEGORY';
 export const REMOVE_CATEGORY = 'REMOVE_CATEGORY';
 export const TOGGLE_CATEGORY_EXPANDED_STATE = 'TOGGLE_CATEGORY_EXPANDED_STATE';
 export const CHANGE_TODO_CATEGORY =  'CHANGE_TODO_CATEGORY';
-export const SHOW_MODAL = 'SHOW_MODAL';
-export const HIDE_MODAL = 'HIDE_MODAL';
 export const CHANGE_CATEGORY_NAME = 'CHANGE_CATEGORY_NAME';
 export const UNDO = 'UNDO';
 export const REDO = 'REDO';
@@ -28,14 +24,6 @@ export function addTodo(name, categoryId) {
 
 export function toggleTodo(id) {
     return { type: TOGGLE_TODO, id };
-}
-
-export function toggleVisibilityFilter(showDone) {
-    return { type: TOGGLE_VISIBILITY_FILTER, showDone };
-}
-
-export function searchPhraseChange(phrase) {
-    return { type: SEARCH_PHRASE_CHANGE, phrase };
 }
 
 export function todoChange(todo) {

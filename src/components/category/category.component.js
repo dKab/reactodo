@@ -10,6 +10,7 @@ import Portal from 'react-modal';
 import {DeleteCategoryModal} from '../delete-category-modal/delete-category-modal.component';
 import {AddCategoryModal} from '../add-category-modal/add-category-modal.component';
 import {ChangeCategoryNameModal} from '../change-category-name-modal/change-category-name-modal.component';
+import {modalStyles} from '../modal/modal.component.jsx';
 
 export const LIST_MODE = 'LIST_MODE';
 export const DETAIL_MODE = 'DETAIL_MODE';
@@ -25,17 +26,6 @@ export class Category extends React.Component {
             [ADD_MODAL]: false,
             [ADD_MODAL]: false,
             [EDIT_MODAL]: false
-        };
-        this.modalStyles = {
-            content : {
-                top: '50%',
-                left: '50%',
-                right: 'auto',
-                bottom: 'auto',
-                transform: 'translate(-50%, -50%)',
-                border: 'none',
-                padding: 'none'
-            }
         };
     }
 
@@ -94,15 +84,15 @@ export class Category extends React.Component {
                               onClick={(e) => this.showModal(e, ADD_MODAL)}><Plus /></span></div>)}
                     {this.props.mode === DETAIL_MODE && <button className="category__move-btn btn"><Move /></button>}
                 </div>
-                <Portal style={this.modalStyles} contentLabel="modal" isOpen={this.state[ADD_MODAL]}>
+                <Portal style={modalStyles} contentLabel="modal" isOpen={this.state[ADD_MODAL]}>
                     <AddCategoryModal onCancel={() => this.hideModal(ADD_MODAL)} onConfirm={this.confirmAddAndHideModal.bind(this)} />
                 </Portal>
-                <Portal style={this.modalStyles} contentLabel="modal" isOpen={this.state[DELETE_MODAL]}>
+                <Portal style={modalStyles} contentLabel="modal" isOpen={this.state[DELETE_MODAL]}>
                     <DeleteCategoryModal onCancel={() => this.hideModal(DELETE_MODAL)}
                          onConfirm={this.confirmDeleteAndHideModal.bind(this)}
                          categoryName={this.props.category.name} />
                 </Portal>
-                <Portal style={this.modalStyles} contentLabel="modal" isOpen={this.state[EDIT_MODAL]}>
+                <Portal style={modalStyles} contentLabel="modal" isOpen={this.state[EDIT_MODAL]}>
                     <ChangeCategoryNameModal  onCancel={()=>this.hideModal(EDIT_MODAL)}
                         onConfirm={this.confirmEditAndHideModal.bind(this)}
                     />

@@ -5,16 +5,32 @@ import './search.css';
 
 class SearchComponent extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            phrase : props.phrase || ''
+        };
+
+        this.onInputValueChange = this.onInputValueChange.bind(this);
+    }
+
+    onInputValueChange(e) {
+        const newText = e.target.value;
+        this.setState({phrase : newText});
+    }
+
     clearInput() {
-        this.input.value = '';
+        this.setState({phrase: ''});
         this.props.onSearchClear();
     }
 
     render() {
         return (<div className="search">
                 <label><input checked={this.props.showDone} onChange={this.props.onCheckboxToggle} type="checkbox"/>Show done</label>
-                <input placeholder="Search" ref={(input) => this.input = input} type="text"
-                       className="search__input" defaultValue={this.props.phrase} onKeyUp={(e) => this.props.onPhraseChange(e, this.input.value)} />
+                <input placeholder="Search" type="text"
+                       className="search__input" value={this.state.phrase} onChange={this.onInputValueChange}
+                       onKeyUp={(e) => this.props.onPhraseChange(e, this.state.phrase)} />
                 <span className="search__clear" onClick={this.clearInput.bind(this)}>&times;</span>
             </div>
         );

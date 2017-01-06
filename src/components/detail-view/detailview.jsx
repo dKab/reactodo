@@ -6,12 +6,6 @@ export class Detailview extends React.Component {
 
     constructor() {
         super();
-        this.state = {
-            todos: [
-                { id: 1, title: 'foo'},
-                { id: 2, title: 'bar'}
-            ]
-        };
     }
 
     componentWillMount() {

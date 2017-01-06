@@ -17,8 +17,8 @@ function renderTree(categories, allCategories, props, rendered = [], omitSubtree
         marginLeft: margin + 'px'
     };
 
-    return categories.map((cat) => {
-        let renderCategory = (isLeaf) => {
+    return categories.map(cat => {
+        let renderCategory = isLeaf => {
             const selected = props.selectedCategory === cat.id;
             return <Category category={cat}
                              isLeaf={isLeaf}

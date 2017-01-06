@@ -1,9 +1,8 @@
 import { combineReducers } from 'redux';
 import {routerReducer} from 'react-router-redux';
-import { ADD_TODO, TOGGLE_TODO, TOGGLE_VISIBILITY_FILTER,
-    TOGGLE_CATEGORY_EXPANDED_STATE, SEARCH_PHRASE_CHANGE, ADD_CATEGORY,
-    TODO_CHANGE, CHANGE_TODO_CATEGORY, REMOVE_CATEGORY,
-SHOW_MODAL, HIDE_MODAL, CHANGE_CATEGORY_NAME } from './actions';
+import { ADD_TODO, TOGGLE_TODO,
+    TOGGLE_CATEGORY_EXPANDED_STATE, ADD_CATEGORY,
+    TODO_CHANGE, CHANGE_TODO_CATEGORY, REMOVE_CATEGORY, CHANGE_CATEGORY_NAME } from './actions';
 import {LOCATION_CHANGE} from 'react-router-redux';
 
 /**
@@ -60,7 +59,7 @@ function todos(state = [], action) {
                     description: '',
                     done: false,
                     categoryId: action.categoryId,
-                    id: findMaxId(state) + 1
+                    id: state.length ? findMaxId(state) + 1 : 0
                 }
             ];
         case TOGGLE_TODO:

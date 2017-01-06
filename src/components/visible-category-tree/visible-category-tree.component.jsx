@@ -9,9 +9,10 @@ import {DETAIL_MODE, LIST_MODE} from '../category/category.component';
 import {browserHistory} from 'react-router';
 import {URLValueMap, SHOW_DONE_DEFAULT_VALUE} from '../search/search.component.jsx';
 
-const getVisibleCategories = (categories, phrase, showDone, todos) => {
-
-	const visible = showDone ? categories : categories.filter(category => isCategoryDone(category, categories, todos));
+export const getVisibleCategories = (categories, searchPhrase, showDoneUrlParam, todos) => {
+	const showDone = showDoneUrlParam ? URLValueMap.get(showDoneUrlParam) : SHOW_DONE_DEFAULT_VALUE,
+			phrase = typeof searchPhrase === 'undefined' ? '' :	 searchPhrase;
+	const visible = showDone ? categories : categories.filter(category => !isCategoryDone(category, categories, todos));
 	if (phrase !== '') {
 		return visible.filter((cat) => cat.name.indexOf(phrase) >= 0);
 	}
@@ -26,13 +27,13 @@ function isCategoryDone(category, categories, todos) {
 			undoneCategory = allRelevantCategories.find(cat => {
 		const categoryTodos = getCategoryTodos(cat, todos),
 				undone = categoryTodos.find(todo => todo.done === false);
-		return typeof undone !== 'undefined';
+		return typeof undone !== 'undefined' || categoryTodos.length === 0 ;
 	});
 	return typeof undoneCategory === 'undefined';
 }
 
 function getAllDescendants(category, categories, descendants) {
-	const children = categories.filter(cat => cat.parentId === category);
+	const children = categories.filter(cat => cat.parentId === category.id);
 
 	Array.prototype.push.apply(descendants, children);
 	children.forEach(child => getAllDescendants(child, categories, descendants));
@@ -43,11 +44,9 @@ function getCategoryTodos(category, todos) {
 }
 
 const mapStateToProps = (state, ownProps) => {
-	const showDone = ownProps.location.query.showDone ? URLValueMap.get(ownProps.location.query.showDone) : SHOW_DONE_DEFAULT_VALUE,
-			phrase = typeof ownProps.location.query.searchPhrase === 'undefined' ? '' :	 ownProps.location.query.searchPhrase;
 	return {
 		selectedCategory: +ownProps.location.query.category,
-		categories: getVisibleCategories(state.present.categories, phrase, showDone, state.present.todos),
+		categories: getVisibleCategories(state.present.categories, ownProps.location.query.searchPhrase, ownProps.location.query.showDone, state.present.todos),
 		categoriesMode: ownProps.location.pathname === '/' ? LIST_MODE : DETAIL_MODE
 	};
 };
