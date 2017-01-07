@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import CategoryTree from '../category-tree/category-tree.component';
 import { toggleCategoryExpandedState,
 		changeCategoryName,
+		changeTodoCategory,
 		addCategory,
 		removeCategory,
 		push} from '../../actions';
@@ -47,7 +48,8 @@ const mapStateToProps = (state, ownProps) => {
 	return {
 		selectedCategory: +ownProps.location.query.category,
 		categories: getVisibleCategories(state.present.categories, ownProps.location.query.searchPhrase, ownProps.location.query.showDone, state.present.todos),
-		categoriesMode: ownProps.location.pathname === '/' ? LIST_MODE : DETAIL_MODE
+		categoriesMode: ownProps.location.pathname === '/' ? LIST_MODE : DETAIL_MODE,
+		todo: ownProps.todo
 	};
 };
 
@@ -70,13 +72,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		},
 		onCategoryEdit: (id, name) =>  {
 			dispatch(changeCategoryName(id, name));
+		},
+		onTodoCategoryChange: (categoryId) => {
+			dispatch(changeTodoCategory(ownProps.todo.id, categoryId));
 		}
 	}
 };
 
-const VisibleCategoryTree = connect(
+export const VisibleCategoryTree = connect(
 		mapStateToProps,
 		mapDispatchToProps
 )(CategoryTree);
-
-export default VisibleCategoryTree;

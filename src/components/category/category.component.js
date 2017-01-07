@@ -75,14 +75,15 @@ export class Category extends React.Component {
             <div className={classes.join(' ')} onClick={() => this.props.onCategoryClick(this.props.category.id)}>
                 {expandButton}
                 <span className="category__name">{this.props.category.name}</span>
-                <span className="category__edit-btn btn" onClick={(e) => this.showModal(e, EDIT_MODAL)}><Edit /></span>
+                {this.props.mode === LIST_MODE && (<span className="category__edit-btn btn" onClick={(e) => this.showModal(e, EDIT_MODAL)}><Edit /></span>)}
                 <div className="fr">
                     {this.props.mode === LIST_MODE &&
                     (<div><span className="category__remove-btn btn"
                                 onClick={(e) => this.showModal(e, DELETE_MODAL)}><Remove /></span>
                         <span className="category__add-btn btn"
                               onClick={(e) => this.showModal(e, ADD_MODAL)}><Plus /></span></div>)}
-                    {this.props.mode === DETAIL_MODE && <button className="category__move-btn btn"><Move /></button>}
+                    {this.props.mode === DETAIL_MODE && this.props.todo.categoryId !== this.props.category.id
+                    && <button className="category__move-btn btn" onClick={() => this.props.onTodoCategoryChange(this.props.category.id)}><Move /></button>}
                 </div>
                 <Portal style={modalStyles} contentLabel="modal" isOpen={this.state[ADD_MODAL]}>
                     <AddCategoryModal onCancel={() => this.hideModal(ADD_MODAL)} onConfirm={this.confirmAddAndHideModal.bind(this)} />

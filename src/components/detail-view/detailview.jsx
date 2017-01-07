@@ -1,41 +1,38 @@
 import React from 'react';
 import TodoDetail from '../todo-detail/todo-detail.component';
-import Categorytree from '../category-tree/category-tree.component';
+import { VisibleCategoryTree } from '../visible-category-tree/visible-category-tree.component.jsx';
+import {connect} from 'react-redux';
+import UndoRedo from '../undo-redo/undo-redo.component.jsx';
 
-export class Detailview extends React.Component {
+import {todoChange, push} from '../../actions';
 
-    constructor() {
-        super();
-    }
-
-    componentWillMount() {
-        const id = this.props.params.id;
-
-        this.fetchTodo(id, (err, todo) =>
-            this.setState({ todo: todo })
-        );
-    }
-
-    fetchTodo(id, cb) {
-        const item = this.state.todos.find(todo => todo.id === +id);
-        if (item) {
-            cb(null, item);
-        } else {
-            cb('Couldn not find item with id ' + id);
-        }
-    }
-
-    render() {
+const DetailviewComponent = ({todo, location,  onSave, onCancel}) => {
         return (
             <div>
-                <header className=""><h1>{this.state.todo.title}</h1></header>
+                <UndoRedo />
+                <header className="todo-title" style={{marginLeft: '10px'}}><h1>{todo.name}</h1></header>
                 <div className="categories-left">
-                    <Categorytree />
+                    <VisibleCategoryTree location={location} todo={todo} />
                 </div>
                 <div className="todos-container">
-                    <TodoDetail />
+                    <TodoDetail todo={todo} onSave={onSave} onCancel={onCancel} />
                 </div>
             </div>
         );
+};
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        todo: state.present.todos.find((todo) => +ownProps.params.id === todo.id),
+        location: ownProps.location
     }
-}
+};
+
+const mapDispatchToProps = (dispatch, ownProps) =>  {
+    return {
+        onSave: (todo) => dispatch(todoChange(todo)),
+        onCancel: () => dispatch(push({...ownProps.location, pathname: '/'}))
+    }
+};
+
+export const Detailview = connect(mapStateToProps, mapDispatchToProps)(DetailviewComponent);
