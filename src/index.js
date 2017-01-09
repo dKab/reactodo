@@ -8,7 +8,7 @@ import {syncHistoryWithStore, routerMiddleware} from 'react-router-redux';
 import reducer from './reducers';
 import { Detailview } from './components/detail-view/detailview.jsx';
 import { ListView } from './components/list-view/listview.jsx';
-
+import {NotFound} from './components/not-found/not-found.component.jsx';
 import './index.css';
 
 const middleware = routerMiddleware(browserHistory);
@@ -20,6 +20,7 @@ ReactDOM.render(
         <Router history={history}>
             <Route path="/todo/:id" component={Detailview} />
             <Route path="/" component={ListView} />
+            <Route path="*" component={NotFound} />
         </Router>
     </Provider>,
   document.getElementById('root')

@@ -5,14 +5,16 @@ export default class TodoDetail extends React.Component {
 
     constructor(props) {
         super(props);
+        if (props.todo) {
+            this.state = {
 
-        this.state = {
-            draft: {
-                name: props.todo.name,
-                description: props.todo.description,
-                done: props.todo.done
-            }
-        };
+                draft: {
+                    name: props.todo.name,
+                    description: props.todo.description,
+                    done: props.todo.done
+                }
+            };
+        }
 
         this.changeDescription = this.changeDescription.bind(this);
         this.toggleDone = this.toggleDone.bind(this);
@@ -48,7 +50,8 @@ export default class TodoDetail extends React.Component {
     render() {
         return (
             <div className="todo-detail">
-                <div className="top">
+                {this.props.todo &&
+                ( <div><div className="top">
                     <div className="fr">
                         <button className="todo-detail__save" onClick={this.saveChanges} disabled={!this.hasAnythingChanged()}>Save changes</button>
                         <button onClick={this.props.onCancel}>Cancel</button>
@@ -57,7 +60,12 @@ export default class TodoDetail extends React.Component {
                 <div><input type="text" value={this.state.draft.name} onChange={e => this.changeName(e.target.value) } /></div>
                 <div><input type="checkbox" id="done-checkbox" checked={this.state.draft.done} onChange={this.toggleDone} />
                     <label htmlFor="done-checkbox">Done</label></div>
-                <div><textarea value={this.state.draft.description} onChange={e => this.changeDescription(e.target.value) } className="todo-detail__description" /></div>
+                <div>
+                    <textarea value={this.state.draft.description}
+                              onChange={e => this.changeDescription(e.target.value) }
+                              className="todo-detail__description" />
+                </div></div>) }
+                {!this.props.todo && <div>Such todo doesn't exist</div>}
             </div>
         );
     }
