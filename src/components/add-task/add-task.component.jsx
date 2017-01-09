@@ -4,7 +4,8 @@ import AddItem from '../add-item/add-item.component';
 import {addTodo} from '../../actions';
 import Portal from 'react-modal';
 import {Modal, modalStyles} from '../modal/modal.component.jsx';
-class AddTaskComponent extends React.Component {
+
+ class AddTaskComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,7 +15,7 @@ class AddTaskComponent extends React.Component {
 
     addTask(name) {
         const categoryExists = typeof this.props.selectedCategory !== 'undefined' && !!this.props.categories.find((cat) => cat.id === +this.props.selectedCategory);
-        if (this.props.categoryExists !== false) {
+        if (categoryExists !== false) {
             this.props.onButtonClick(name);
         } else {
             this.showWarning();
