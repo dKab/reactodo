@@ -5,45 +5,6 @@ import { ADD_TODO, TOGGLE_TODO,
     TODO_CHANGE, CHANGE_TODO_CATEGORY, REMOVE_CATEGORY, CHANGE_CATEGORY_NAME } from './actions';
 import {LOCATION_CHANGE} from 'react-router-redux';
 
-/**
- * This is just to visualize state structure
- * @param state
- * @param action
- * @returns {boolean}
- */
-//const state = {
-//    showDone: false,
-//    searchPhrase: '',
-//    categories: [
-//        {
-//            name: 'category1',
-//            id: 1,
-//            selected: false,
-//            parentId: null,
-//            expanded: true
-//        },
-//        {
-//            name: 'category1_1',
-//            id: 2,
-//            selected: false,
-//            parentId: 1
-//        }
-//    ],
-//    todos: [
-//        {
-//            id: 1,
-//            name: 'Consider using Redux',
-//            description: 'text',
-//            done: false,
-//            categoryId: 2
-//        }
-//    ],
-//    modal: {
-//        modalType: null,
-//        modalProps: {}
-//    }
-//};
-
 const initialState = {
     categories: [],
     todos: []
