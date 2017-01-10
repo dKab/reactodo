@@ -9,7 +9,7 @@ import {todoChange, push} from '../../actions';
 const DetailviewComponent = ({todo, location,  onSave, onCancel}) => {
         return (
 
-            <div>
+            <div className="detail-view">
                 <UndoRedo />
                 <header className="todo-title" style={{marginLeft: '10px'}}><h1>{todo && todo.name}</h1></header>
                 <div className="categories-left">

@@ -60,10 +60,17 @@ html, body, #root, .app-container {
   overflow: hidden;
 }
 
-.categories-left, .todos-container {
+.list-view .categories-left, .list-view .todos-container {
   height: calc(100% - 88px);
   max-height: calc(100% - 88px);
   min-height: calc(100% - 88px);
+  overflow-y: scroll;
+}
+
+.detail-view .categories-left, .detail-view .todos-container {
+  height: calc(100% - 37px);
+  max-height: calc(100% - 37px);
+  min-height: calc(100% - 37px);
   overflow-y: scroll;
 }
 * {
