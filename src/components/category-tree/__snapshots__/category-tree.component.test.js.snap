@@ -1,0 +1,574 @@
+exports[`test CategogryTree renders correctly 1`] = `
+<div
+  className="category-tree">
+  <div
+    style={
+      Object {
+        "marginLeft": "0px",
+      }
+    }>
+    <div
+      className="category"
+      onClick={[Function]}>
+      <span
+        className="category__expand-btn category__expand-btn--expanded"
+        onClick={[Function]}>
+        <span
+          className="fa fa-angle-down" />
+      </span>
+      <span
+        className="category__name">
+        cat1
+      </span>
+      <span
+        className="category__edit-btn btn"
+        onClick={[Function]}>
+        <span
+          className="fa fa-edit" />
+      </span>
+      <div
+        className="fr">
+        <div>
+          <span
+            className="category__remove-btn btn"
+            onClick={[Function]}>
+            <span
+              className="fa fa-trash" />
+          </span>
+          <span
+            className="category__add-btn btn"
+            onClick={[Function]}>
+            <span
+              className="fa fa-plus-square-o" />
+          </span>
+        </div>
+      </div>
+      <noscript />
+      <noscript />
+      <noscript />
+    </div>
+    <div
+      style={
+        Object {
+          "marginLeft": "10px",
+        }
+      }>
+      <div
+        className="category category--leaf"
+        onClick={[Function]}>
+        <span
+          className="category__name">
+          cat1_1
+        </span>
+        <span
+          className="category__edit-btn btn"
+          onClick={[Function]}>
+          <span
+            className="fa fa-edit" />
+        </span>
+        <div
+          className="fr">
+          <div>
+            <span
+              className="category__remove-btn btn"
+              onClick={[Function]}>
+              <span
+                className="fa fa-trash" />
+            </span>
+            <span
+              className="category__add-btn btn"
+              onClick={[Function]}>
+              <span
+                className="fa fa-plus-square-o" />
+            </span>
+          </div>
+        </div>
+        <noscript />
+        <noscript />
+        <noscript />
+      </div>
+    </div>
+  </div>
+  <div
+    style={
+      Object {
+        "marginLeft": "0px",
+      }
+    }>
+    <div
+      className="category"
+      onClick={[Function]}>
+      <span
+        className="category__expand-btn category__expand-btn--expanded"
+        onClick={[Function]}>
+        <span
+          className="fa fa-angle-down" />
+      </span>
+      <span
+        className="category__name">
+        cat2
+      </span>
+      <span
+        className="category__edit-btn btn"
+        onClick={[Function]}>
+        <span
+          className="fa fa-edit" />
+      </span>
+      <div
+        className="fr">
+        <div>
+          <span
+            className="category__remove-btn btn"
+            onClick={[Function]}>
+            <span
+              className="fa fa-trash" />
+          </span>
+          <span
+            className="category__add-btn btn"
+            onClick={[Function]}>
+            <span
+              className="fa fa-plus-square-o" />
+          </span>
+        </div>
+      </div>
+      <noscript />
+      <noscript />
+      <noscript />
+    </div>
+    <div
+      style={
+        Object {
+          "marginLeft": "10px",
+        }
+      }>
+      <div
+        className="category category--leaf"
+        onClick={[Function]}>
+        <span
+          className="category__name">
+          cat2_1
+        </span>
+        <span
+          className="category__edit-btn btn"
+          onClick={[Function]}>
+          <span
+            className="fa fa-edit" />
+        </span>
+        <div
+          className="fr">
+          <div>
+            <span
+              className="category__remove-btn btn"
+              onClick={[Function]}>
+              <span
+                className="fa fa-trash" />
+            </span>
+            <span
+              className="category__add-btn btn"
+              onClick={[Function]}>
+              <span
+                className="fa fa-plus-square-o" />
+            </span>
+          </div>
+        </div>
+        <noscript />
+        <noscript />
+        <noscript />
+      </div>
+    </div>
+    <div
+      style={
+        Object {
+          "marginLeft": "10px",
+        }
+      }>
+      <div
+        className="category"
+        onClick={[Function]}>
+        <span
+          className="category__expand-btn category__expand-btn--expanded"
+          onClick={[Function]}>
+          <span
+            className="fa fa-angle-down" />
+        </span>
+        <span
+          className="category__name">
+          cat2_2
+        </span>
+        <span
+          className="category__edit-btn btn"
+          onClick={[Function]}>
+          <span
+            className="fa fa-edit" />
+        </span>
+        <div
+          className="fr">
+          <div>
+            <span
+              className="category__remove-btn btn"
+              onClick={[Function]}>
+              <span
+                className="fa fa-trash" />
+            </span>
+            <span
+              className="category__add-btn btn"
+              onClick={[Function]}>
+              <span
+                className="fa fa-plus-square-o" />
+            </span>
+          </div>
+        </div>
+        <noscript />
+        <noscript />
+        <noscript />
+      </div>
+      <div
+        style={
+          Object {
+            "marginLeft": "10px",
+          }
+        }>
+        <div
+          className="category category--leaf"
+          onClick={[Function]}>
+          <span
+            className="category__name">
+            cat2_2_1
+          </span>
+          <span
+            className="category__edit-btn btn"
+            onClick={[Function]}>
+            <span
+              className="fa fa-edit" />
+          </span>
+          <div
+            className="fr">
+            <div>
+              <span
+                className="category__remove-btn btn"
+                onClick={[Function]}>
+                <span
+                  className="fa fa-trash" />
+              </span>
+              <span
+                className="category__add-btn btn"
+                onClick={[Function]}>
+                <span
+                  className="fa fa-plus-square-o" />
+              </span>
+            </div>
+          </div>
+          <noscript />
+          <noscript />
+          <noscript />
+        </div>
+      </div>
+      <div
+        style={
+          Object {
+            "marginLeft": "10px",
+          }
+        }>
+        <div
+          className="category"
+          onClick={[Function]}>
+          <span
+            className="category__expand-btn category__expand-btn--expanded"
+            onClick={[Function]}>
+            <span
+              className="fa fa-angle-down" />
+          </span>
+          <span
+            className="category__name">
+            cat2_2_2
+          </span>
+          <span
+            className="category__edit-btn btn"
+            onClick={[Function]}>
+            <span
+              className="fa fa-edit" />
+          </span>
+          <div
+            className="fr">
+            <div>
+              <span
+                className="category__remove-btn btn"
+                onClick={[Function]}>
+                <span
+                  className="fa fa-trash" />
+              </span>
+              <span
+                className="category__add-btn btn"
+                onClick={[Function]}>
+                <span
+                  className="fa fa-plus-square-o" />
+              </span>
+            </div>
+          </div>
+          <noscript />
+          <noscript />
+          <noscript />
+        </div>
+        <div
+          style={
+            Object {
+              "marginLeft": "10px",
+            }
+          }>
+          <div
+            className="category"
+            onClick={[Function]}>
+            <span
+              className="category__expand-btn category__expand-btn--expanded"
+              onClick={[Function]}>
+              <span
+                className="fa fa-angle-down" />
+            </span>
+            <span
+              className="category__name">
+              cat2_2_2_1
+            </span>
+            <span
+              className="category__edit-btn btn"
+              onClick={[Function]}>
+              <span
+                className="fa fa-edit" />
+            </span>
+            <div
+              className="fr">
+              <div>
+                <span
+                  className="category__remove-btn btn"
+                  onClick={[Function]}>
+                  <span
+                    className="fa fa-trash" />
+                </span>
+                <span
+                  className="category__add-btn btn"
+                  onClick={[Function]}>
+                  <span
+                    className="fa fa-plus-square-o" />
+                </span>
+              </div>
+            </div>
+            <noscript />
+            <noscript />
+            <noscript />
+          </div>
+          <div
+            style={
+              Object {
+                "marginLeft": "10px",
+              }
+            }>
+            <div
+              className="category"
+              onClick={[Function]}>
+              <span
+                className="category__expand-btn category__expand-btn--expanded"
+                onClick={[Function]}>
+                <span
+                  className="fa fa-angle-down" />
+              </span>
+              <span
+                className="category__name">
+                cat2_2_2_1_1
+              </span>
+              <span
+                className="category__edit-btn btn"
+                onClick={[Function]}>
+                <span
+                  className="fa fa-edit" />
+              </span>
+              <div
+                className="fr">
+                <div>
+                  <span
+                    className="category__remove-btn btn"
+                    onClick={[Function]}>
+                    <span
+                      className="fa fa-trash" />
+                  </span>
+                  <span
+                    className="category__add-btn btn"
+                    onClick={[Function]}>
+                    <span
+                      className="fa fa-plus-square-o" />
+                  </span>
+                </div>
+              </div>
+              <noscript />
+              <noscript />
+              <noscript />
+            </div>
+            <div
+              style={
+                Object {
+                  "marginLeft": "10px",
+                }
+              }>
+              <div
+                className="category category--leaf"
+                onClick={[Function]}>
+                <span
+                  className="category__name">
+                  cat2_2_2_1_1_1
+                </span>
+                <span
+                  className="category__edit-btn btn"
+                  onClick={[Function]}>
+                  <span
+                    className="fa fa-edit" />
+                </span>
+                <div
+                  className="fr">
+                  <div>
+                    <span
+                      className="category__remove-btn btn"
+                      onClick={[Function]}>
+                      <span
+                        className="fa fa-trash" />
+                    </span>
+                    <span
+                      className="category__add-btn btn"
+                      onClick={[Function]}>
+                      <span
+                        className="fa fa-plus-square-o" />
+                    </span>
+                  </div>
+                </div>
+                <noscript />
+                <noscript />
+                <noscript />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          style={
+            Object {
+              "marginLeft": "10px",
+            }
+          }>
+          <div
+            className="category category--leaf"
+            onClick={[Function]}>
+            <span
+              className="category__name">
+              cat2_2_2_2
+            </span>
+            <span
+              className="category__edit-btn btn"
+              onClick={[Function]}>
+              <span
+                className="fa fa-edit" />
+            </span>
+            <div
+              className="fr">
+              <div>
+                <span
+                  className="category__remove-btn btn"
+                  onClick={[Function]}>
+                  <span
+                    className="fa fa-trash" />
+                </span>
+                <span
+                  className="category__add-btn btn"
+                  onClick={[Function]}>
+                  <span
+                    className="fa fa-plus-square-o" />
+                </span>
+              </div>
+            </div>
+            <noscript />
+            <noscript />
+            <noscript />
+          </div>
+        </div>
+      </div>
+      <div
+        style={
+          Object {
+            "marginLeft": "10px",
+          }
+        }>
+        <div
+          className="category category--leaf"
+          onClick={[Function]}>
+          <span
+            className="category__name">
+            cat2_2_3
+          </span>
+          <span
+            className="category__edit-btn btn"
+            onClick={[Function]}>
+            <span
+              className="fa fa-edit" />
+          </span>
+          <div
+            className="fr">
+            <div>
+              <span
+                className="category__remove-btn btn"
+                onClick={[Function]}>
+                <span
+                  className="fa fa-trash" />
+              </span>
+              <span
+                className="category__add-btn btn"
+                onClick={[Function]}>
+                <span
+                  className="fa fa-plus-square-o" />
+              </span>
+            </div>
+          </div>
+          <noscript />
+          <noscript />
+          <noscript />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    style={
+      Object {
+        "marginLeft": "0px",
+      }
+    }>
+    <div
+      className="category"
+      onClick={[Function]}>
+      <span
+        className="category__name">
+        cat3
+      </span>
+      <span
+        className="category__edit-btn btn"
+        onClick={[Function]}>
+        <span
+          className="fa fa-edit" />
+      </span>
+      <div
+        className="fr">
+        <div>
+          <span
+            className="category__remove-btn btn"
+            onClick={[Function]}>
+            <span
+              className="fa fa-trash" />
+          </span>
+          <span
+            className="category__add-btn btn"
+            onClick={[Function]}>
+            <span
+              className="fa fa-plus-square-o" />
+          </span>
+        </div>
+      </div>
+      <noscript />
+      <noscript />
+      <noscript />
+    </div>
+  </div>
+</div>
+`;

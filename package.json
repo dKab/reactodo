@@ -41,6 +41,7 @@
     "react-addons-test-utils": "^15.4.2",
     "react-dev-utils": "^0.3.0",
     "react-test-render": "^1.0.3",
+    "react-test-renderer": "^15.4.2",
     "recursive-readdir": "2.1.0",
     "rimraf": "2.5.4",
     "strip-ansi": "3.0.1",
@@ -52,9 +53,9 @@
     "whatwg-fetch": "1.0.0"
   },
   "dependencies": {
+    "font-awesome": "^4.7.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
-    "react-icons": "^2.2.1",
     "react-modal": "^1.6.5",
     "react-redux": "^5.0.1",
     "react-router": "^3.0.0",
@@ -71,9 +72,6 @@
       "jsx",
       "js",
       "json"
-    ],
-    "transformIgnorePatterns": [
-      "node_modules/?!(react-icons)"
     ],
     "moduleNameMapper": {
       "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/config/jest/FileStub.js",

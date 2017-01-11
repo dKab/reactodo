@@ -1,4 +1,3 @@
-import Close from 'react-icons/fa/close';
 import React from 'react';
 import './modal.css';
 export const modalStyles = {
@@ -15,7 +14,7 @@ export const modalStyles = {
 export const Modal = (props) => {
     return (
         <div className="modal">
-            <div className="modal__top-panel"><div className="modal__close-btn btn"><Close onClick={props.onCancel} /></div></div>
+            <div className="modal__top-panel"><div className="modal__close-btn btn"><span className="fa fa-close" onClick={props.onCancel} /></div></div>
             {props.children}
             <div className="modal__buttons">
                 <div className="fr">

@@ -1,4 +1,5 @@
-import renderer from 'react-test-render';
+import React  from 'react';
+import renderer from 'react-test-renderer';
 import CategoryTree from './category-tree.component';
 import {categories} from '../../../testing-utils/deep-nested-category-tree';
 import {LIST_MODE, DETAIL_MODE} from '../category/category.component'

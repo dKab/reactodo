@@ -10,6 +10,7 @@ import { Detailview } from './components/detail-view/detailview.jsx';
 import { ListView } from './components/list-view/listview.jsx';
 import {NotFound} from './components/not-found/not-found.component.jsx';
 import './index.css';
+import 'font-awesome/css/font-awesome.css';
 
 const middleware = routerMiddleware(browserHistory);
 const store = createStore(reducer, applyMiddleware(middleware));
