@@ -144,7 +144,6 @@ function undoable(reducer) {
                     present: newPresent,
                     future: []
                 };
-                console.log(newState);
                 return newState;
         }
     }
