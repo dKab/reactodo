@@ -13,3 +13,6 @@
 .todo-detail .top {
     padding: 0;
 }
+.todo-detail__name, .todo-detail__state {
+    margin-bottom: 10px;
+}

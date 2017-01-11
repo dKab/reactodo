@@ -91,3 +91,7 @@ button:not([disabled]) {
 .undo-redo button {
   margin-left: 10px;
 }
+.fa {
+  margin: 0 5px;
+  cursor: pointer;
+}

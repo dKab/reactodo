@@ -57,10 +57,10 @@ export default class TodoDetail extends React.Component {
                         <button onClick={this.props.onCancel}>Cancel</button>
                     </div>
                 </div>
-                <div><input type="text" value={this.state.draft.name} onChange={e => this.changeName(e.target.value) } /></div>
-                <div><input type="checkbox" id="done-checkbox" checked={this.state.draft.done} onChange={this.toggleDone} />
+                <div className="todo-detail__name"><input type="text" value={this.state.draft.name} onChange={e => this.changeName(e.target.value) } /></div>
+                <div className="todo-detail__state"><input type="checkbox" id="done-checkbox" checked={this.state.draft.done} onChange={this.toggleDone} />
                     <label htmlFor="done-checkbox">Done</label></div>
-                <div>
+                <div >
                     <textarea value={this.state.draft.description}
                               onChange={e => this.changeDescription(e.target.value) }
                               className="todo-detail__description" />
