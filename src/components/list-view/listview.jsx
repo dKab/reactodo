@@ -12,7 +12,7 @@ import {connect} from 'react-redux';
 
 function ListviewComponent({location, todos, onTodoEdit, onTodoToggle}) {
         return (
-            <div>
+            <div className="list-view">
                 <div className="clearfix">
                     <div className="logo">Todo list</div>
                     <Search location={location} />

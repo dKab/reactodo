@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import {routerReducer} from 'react-router-redux';
 import { ADD_TODO, TOGGLE_TODO,
     TOGGLE_CATEGORY_EXPANDED_STATE, ADD_CATEGORY,
-    TODO_CHANGE, CHANGE_TODO_CATEGORY, REMOVE_CATEGORY, CHANGE_CATEGORY_NAME } from './actions';
+    TODO_CHANGE, REMOVE_CATEGORY, CHANGE_CATEGORY_NAME } from './actions';
 import {LOCATION_CHANGE} from 'react-router-redux';
 
 const initialState = {
@@ -10,7 +10,7 @@ const initialState = {
     todos: []
 };
 
-function todos(state = [], action) {
+export function todos(state = [], action) {
     switch (action.type) {
         case ADD_TODO:
             return [
@@ -37,19 +37,12 @@ function todos(state = [], action) {
                 }
                 return todo;
             });
-        case CHANGE_TODO_CATEGORY:
-            return state.map(todo => {
-                if (todo.id === action.todoId) {
-                    return {...todo, categoryId: action.categoryId };
-                }
-                return todo;
-            });
         default:
             return state
     }
 }
 
-function categories(state = [], action) {
+export function categories(state = [], action) {
     switch (action.type) {
         case ADD_CATEGORY:
             const newState = [
@@ -58,7 +51,6 @@ function categories(state = [], action) {
                     name: action.name,
                     parentId: action.parentId,
                     id: state.length ? findMaxId(state) + 1 : 0,
-                    selected: state.length ? false : true,
                     expanded: false
                 }
             ];

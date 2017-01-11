@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import CategoryTree from '../category-tree/category-tree.component';
 import { toggleCategoryExpandedState,
 		changeCategoryName,
-		changeTodoCategory,
+		todoChange,
 		addCategory,
 		removeCategory,
 		push} from '../../actions';
@@ -74,7 +74,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 			dispatch(changeCategoryName(id, name));
 		},
 		onTodoCategoryChange: (categoryId) => {
-			dispatch(changeTodoCategory(ownProps.todo.id, categoryId));
+			dispatch(todoChange({ ...ownProps.todo, categoryId }));
 		}
 	}
 };
